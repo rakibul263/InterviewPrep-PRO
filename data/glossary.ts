@@ -233,5 +233,195 @@ export const TECH_GLOSSARY: Record<string, TechGlossaryTerm> = {
     banglaTitle: "ভার্চুয়াল ডম (Virtual DOM)",
     shortExplanation:
       "মেমরিতে থাকা রিয়েল ব্রাউজার DOM-এর একটি হালকা জাভাস্ক্রিপ্ট অবজেক্ট রিপ্রেজেন্টেশন, যার মাধ্যমে React ডিফারেন্স (Diffing) করে শুধুমাত্র প্রয়োজনীয় অংশ আপডেট করে।",
+    category: "React Core",
+  },
+  reconciliation: {
+    term: "Reconciliation",
+    aliases: ["reconciler", "diffing algorithm", "diffing"],
+    banglaTitle: "রিকনসিলিয়েশন (Reconciliation)",
+    shortExplanation:
+      "React-এর একটি অ্যালগরিদম যার মাধ্যমে পূর্ববর্তী Virtual DOM এবং নতুন Virtual DOM-এর তুলনা (Diffing) করে ঠিক কোন অংশগুলো রিয়েল ব্রাউজার DOM-এ আপডেট করতে হবে তা নিখুঁতভাবে নির্ধারণ করা হয়।",
+    exampleOrTip: "React টাইপ কম্প্যারিজন এবং 'key' প্রপ ব্যবহার করে O(n) সময়ে অপ্টিমাইজড রিকনসিলিয়েশন করে।",
+    category: "React Core",
+  },
+  fiber: {
+    term: "React Fiber",
+    aliases: ["react fiber", "fiber node", "fibers"],
+    banglaTitle: "রিঅ্যাক্ট ফাইবার (React Fiber Engine)",
+    shortExplanation:
+      "React 16-এ ইন্ট্রোডিউস করা সম্পূর্ণ নতুন রিকনসিলিয়েশন আর্কিটেকচার। এটি রেন্ডারিং টাস্ককে ছোট ছোট ওয়ার্ক ইউনিটে ভাগ করে পজ (pause), রিজিউম (resume) বা বাতিল করার মাধ্যমে কনকারেন্ট (Concurrent) ও স্মুথ ৬fps ইউজার এক্সপেরিয়েন্স নিশ্চিত করে।",
+    exampleOrTip: "ফাইবার নোডগুলো Singly-Linked List কাঠামোর মাধ্যমে চাইল্ড, সিবলিং ও রিটার্ন পয়েন্ট ট্র্যাক করে।",
+    category: "React Internals",
+  },
+  "controlled component": {
+    term: "Controlled Component",
+    aliases: ["controlled components", "controlled input"],
+    banglaTitle: "কন্ট্রোল্ড কম্পোনেন্ট",
+    shortExplanation:
+      "এমন ফর্ম এলিমেন্ট যার ইনপুট ভ্যালু সম্পূর্ণভাবে React State দ্বারা নিয়ন্ত্রিত হয় এবং যেকোনো পরিবর্তনের সাথে সাথে onChange হ্যান্ডলারের মাধ্যমে স্টেট আপডেট হয়।",
+    exampleOrTip: "Single source of truth নিশ্চিত করে এবং ইনস্ট্যান্ট ইনপুট ভ্যালিডেশনের সুযোগ দেয়।",
+    category: "React Forms",
+  },
+  "uncontrolled component": {
+    term: "Uncontrolled Component",
+    aliases: ["uncontrolled components", "uncontrolled form"],
+    banglaTitle: "আনকন্ট্রোল্ড কম্পোনেন্ট",
+    shortExplanation:
+      "এমন ফর্ম এলিমেন্ট যার অভ্যন্তরীণ মান ব্রাউজার DOM নিজে হ্যান্ডেল করে। React এতে কোনো স্টেট মেইনটেইন করে না, বরং প্রয়োজনে `useRef` বা ফর্ম সাবমিট দিয়ে সরাসরি DOM থেকে মান নেওয়া হয়।",
+    exampleOrTip: "ফাইল আপলোড `<input type='file' />` এবং হেভি পারফরম্যান্স ফর্মের জন্য উপযুক্ত।",
+    category: "React Forms",
+  },
+  "dependency array": {
+    term: "Dependency Array",
+    aliases: ["deps array", "dependencies array"],
+    banglaTitle: "ডিপেন্ডেন্সি অ্যারে (Dependency Array)",
+    shortExplanation:
+      "`useEffect`, `useMemo`, বা `useCallback`-এ পাস করা ভ্যালুর অ্যারে। রেন্ডারের সময় `Object.is()` দিয়ে পূর্ববর্তী ও বর্তমান ভ্যালুর তুলনা করে হুকটি পুনরায় এক্সিকিউট হবে কি না তা নির্ধারণ করে।",
+    exampleOrTip: "অবজেক্ট বা ফাংশন সরাসরি ডিপেন্ডেন্সিতে দিলে রেফারেন্স ভিন্নতার কারণে ইনফিনিট লুপ হতে পারে।",
+    category: "React Hooks",
+  },
+  "stale closure": {
+    term: "Stale Closure",
+    aliases: ["stale state", "stale closures"],
+    banglaTitle: "স্টেল ক্লোজার (Stale Closure)",
+    shortExplanation:
+      "যখন একটি ফাংশন বা অ্যাসিঙ্ক কলব্যাক তার তৈরি হওয়ার সময়কার পুরোনো স্টেট/প্রপসের ভ্যালু মেমরিতে ধরে রাখে এবং পরিবর্তিত নতুন স্টেট দেখতে পায় না।",
+    exampleOrTip: "সমাধান: `setCount(prev => prev + 1)` ফাংশনাল আপডেট বা রিফ (`useRef`) ব্যবহার করা।",
+    category: "React Hooks",
+  },
+  "server component": {
+    term: "Server Component (RSC)",
+    aliases: ["server components", "rsc", "react server components"],
+    banglaTitle: "সার্ভার কম্পোনেন্ট (RSC)",
+    shortExplanation:
+      "React ও Next.js App Router-এর এমন একটি কম্পোনেন্ট যা শুধুমাত্র সার্ভারেই এক্সিকিউট হয় এবং ক্লায়েন্ট ব্রাউজারে জিরো (0 KB) জাভাস্ক্রিপ্ট বান্ডেল পাঠায়। সরাসরি ডাটাবেস ও সিক্রেট অ্যাক্সেস করতে পারে।",
+    exampleOrTip: "এতে useState, useEffect বা ব্রাউজার DOM ইভেন্ট হ্যান্ডলার ব্যবহার করা যায় না।",
+    category: "Next.js",
+  },
+  "client component": {
+    term: "Client Component",
+    aliases: ["client components", "'use client'"],
+    banglaTitle: "ক্লায়েন্ট কম্পোনেন্ট ('use client')",
+    shortExplanation:
+      "Next.js-এ ফাইলটির শীর্ষে `'use client'` লিখে সংজ্ঞায়িত করা কম্পোনেন্ট যা ব্রাউজারে হাইড্রেট হয় এবং ইন্টারঅ্যাক্টিভিটি (useState, onClick, DOM APIs) প্রদান করে।",
+    exampleOrTip: "পারফরম্যান্স ভালো রাখতে ক্লায়েন্ট বাউন্ডারিকে ট্রি-এর একদম নিচের পাতায় (Leaf Node) সীমাবদ্ধ রাখা উচিত।",
+    category: "Next.js",
+  },
+  "request memoization": {
+    term: "Request Memoization",
+    aliases: ["fetch memoization", "react cache"],
+    banglaTitle: "রিকোয়েস্ট মেমোইজেশন",
+    shortExplanation:
+      "একই রেন্ডার সাইকেলে একই API বা ফাংশনে একাধিকবার রিকোয়েস্ট হলে React ও Next.js স্বয়ংক্রিয়ভাবে প্রথম কলের রেজাল্ট মেমরিতে ক্যাশ করে রাখে এবং পরবর্তীতে ডুপ্লিকেট নেটওয়ার্ক কল বন্ধ করে।",
+    category: "Next.js Caching",
+  },
+  "data cache": {
+    term: "Data Cache",
+    aliases: ["nextjs data cache", "fetch cache"],
+    banglaTitle: "নেক্সটজেএস ডেটা ক্যাশ (Data Cache)",
+    shortExplanation:
+      "সার্ভার সাইডে রিকোয়েস্টের বাইরেও ডেটা সংরক্ষণ করে রাখার স্থায়ী ক্যাশ লেয়ার। যা `revalidateTag` বা নির্দিষ্ট টাইম ইন্টারভালে ইনভ্যালিডেট না হওয়া পর্যন্ত সার্ভারলেস বা সার্ভার রিস্টার্টেও অটুট থাকে।",
+    category: "Next.js Caching",
+  },
+  "full route cache": {
+    term: "Full Route Cache",
+    aliases: ["route cache", "static html cache"],
+    banglaTitle: "ফুল রুট ক্যাশ (Full Route Cache)",
+    shortExplanation:
+      "বিল্ড টাইমে বা অন-ডিমান্ড রিভ্যালিডেশনের সময় সম্পূর্ণ পেজের স্ট্যাটিক HTML এবং RSC Payload সার্ভারে ক্যাশ করে রাখা, যাতে কোনো রেন্ডারিং খরচ ছাড়াই তাত্ক্ষণিক রেসপন্স দেওয়া যায়।",
+    category: "Next.js Caching",
+  },
+  "router cache": {
+    term: "Router Cache (Client Cache)",
+    aliases: ["client router cache"],
+    banglaTitle: "ক্লায়েন্ট রাউটার ক্যাশ (Router Cache)",
+    shortExplanation:
+      "ব্রাউজার মেমরিতে ভিজিট করা প্রিফেচড রুট সেগমেন্টগুলো সেভ রাখা। ফলে ক্লায়েন্ট-সাইড নেভিগেশনে সার্ভারে রিকোয়েস্ট না পাঠিয়ে তৎক্ষণাৎ ট্রানজিশন হয়।",
+    category: "Next.js Caching",
+  },
+  middleware: {
+    term: "Next.js Middleware",
+    aliases: ["middleware.ts", "proxy.ts", "edge middleware"],
+    banglaTitle: "মিডলওয়্যার (Middleware)",
+    shortExplanation:
+      "একটি রিকোয়েস্ট পেজে পৌঁছানোর আগেই Edge Runtime-এ তাকে ইন্টারসেপ্ট করার শক্তিশালী লেয়ার। এর মাধ্যমে সিকিউরিটি রিডাইরেক্ট, অথেন্টিকেশন চেক, কুকি রিরাইট এবং রিভার্স প্রক্সি করা যায়।",
+    exampleOrTip: "মিডলওয়্যার এজ রানটাইমে চলে, তাই এতে ভারী Node.js লাইব্রেরি ব্যবহার করা যায় না।",
+    category: "Next.js Security",
+  },
+  "error boundary": {
+    term: "Error Boundary",
+    aliases: ["error boundaries", "error.tsx", "global-error.tsx"],
+    banglaTitle: "এরর বাউন্ডারি (Error Boundary)",
+    shortExplanation:
+      "React-এর একটি বিশেষ মেকানিজম যা চাইল্ড কম্পোনেন্ট ট্রির জাভাস্ক্রিপ্ট এররগুলোকে ক্যাচ করে পুরো অ্যাপ ক্র্যাশ হওয়া থেকে রক্ষা করে এবং ইউজারকে একটি সুন্দর ফলব্যাক UI দেখায়।",
+    category: "React Architecture",
+  },
+  virtualization: {
+    term: "List Virtualization (Windowing)",
+    aliases: ["virtualized list", "virtual scroll", "windowing"],
+    banglaTitle: "লিস্ট ভার্চুয়ালাইজেশন (Windowing)",
+    shortExplanation:
+      "হাজার হাজার ডেটার মধ্যে শুধুমাত্র ব্যবহারকারীর স্ক্রিনে যে কয়টি আইটেম দেখা যাচ্ছে ঠিক সে কয়টি DOM নোড রেন্ডার করা এবং স্ক্রল অনুযায়ী ডাইনামিকালি নোড রিসাইকেল করা।",
+    exampleOrTip: "`@tanstack/react-virtual` বা `react-window` দিয়ে লাখ লাখ আইটেম ল্যাগ ছাড়া রেন্ডার করা যায়।",
+    category: "Performance",
+  },
+  "layout thrashing": {
+    term: "Layout Thrashing",
+    aliases: ["reflow", "forced synchronous layout"],
+    banglaTitle: "লেআউট থ্র্যাশিং (Layout Thrashing)",
+    shortExplanation:
+      "জাভাস্ক্রিপ্ট লুপের মধ্যে বারবার DOM রিড (যেমন `offsetHeight`) এবং DOM রাইট (যেমন `style.height`) করার ফলে ব্রাউজারকে ঘনঘন পুরো লেআউট রি-ক্যালকুলেট করতে বাধ্য হওয়া, যা চরম ল্যাগ তৈরি করে।",
+    category: "Performance",
+  },
+  ttfb: {
+    term: "TTFB (Time to First Byte)",
+    aliases: ["time to first byte"],
+    banglaTitle: "টাইম টু ফার্স্ট বাইট (TTFB)",
+    shortExplanation:
+      "ব্রাউজার রিকোয়েস্ট পাঠানোর পর সার্ভার থেকে রেসপন্সের প্রথম ১ বাইট ডেটা রিসিভ করতে যে সময় লাগে। ভারী সার্ভার ক্যালকুলেশন বা ধীর ডাটাবেস কল TTFB বাড়িয়ে দেয়।",
+    exampleOrTip: "Next.js Streaming এবং `<Suspense>` ব্যবহার করে TTFB নাটকীয়ভাবে কমানো যায়।",
+    category: "Performance",
+  },
+  "lifting state up": {
+    term: "Lifting State Up",
+    aliases: ["lift state up", "lift state"],
+    banglaTitle: "স্টেট লিফটিং (Lifting State Up)",
+    shortExplanation:
+      "যখন একাধিক সিবলিং কম্পোনেন্টের একই ডেটা শেয়ার করার প্রয়োজন হয়, তখন স্টেটটিকে তাদের নিকটতম কমন প্যারেন্ট কম্পোনেন্টে স্থানান্তর করা।",
+    category: "React Patterns",
+  },
+  "web worker": {
+    term: "Web Worker",
+    aliases: ["web workers", "worker thread"],
+    banglaTitle: "ওয়েব ওয়ার্কার (Web Worker)",
+    shortExplanation:
+      "ব্রাউজারের ব্যাকগ্রাউন্ডে আলাদা থ্রেডে ভারী গাণিতিক হিসাব বা ডাটা প্রসেসিং চালানো, যাতে মেইন UI থ্রেড এবং ইউজার ইন্টারঅ্যাকশন কখনোই ফ্রিজ না হয়।",
+    category: "Performance",
+  },
+  "route grouping": {
+    term: "Route Grouping",
+    aliases: ["route groups", "(group)"],
+    banglaTitle: "রুট গ্রুপিং (Route Groups)",
+    shortExplanation:
+      "Next.js App Router-এ ফোল্ডারের নাম প্রথম বন্ধনী `(folder)` দিয়ে রাখলে তা URL পাথে কোনো প্রভাব না ফেলে শুধুমাত্র লজিক্যাল অর্গানাইজেশন বা আলাদা রুট লেআউট তৈরি করতে দেয়।",
+    category: "Next.js",
+  },
+  "dynamic routing": {
+    term: "Dynamic Routing",
+    aliases: ["[slug]", "catch-all routes", "optional catch-all"],
+    banglaTitle: "ডায়নামিক রাউটিং (Dynamic Routing)",
+    shortExplanation:
+      "Next.js-এ ব্র্যাকেট সিনট্যাক্স যেমন `[id]` বা `[...slug]` ব্যবহার করে রানটাইমে URL প্যারামিটার গ্রহণ করে কনটেন্ট রেন্ডার করার ব্যবস্থা।",
+    category: "Next.js",
+  },
+  "http-only cookie": {
+    term: "HTTP-Only Cookie",
+    aliases: ["httponly cookies", "secure cookies", "httponly"],
+    banglaTitle: "এইচটিটিপি-অনলি কুকি (HTTP-Only Cookie)",
+    shortExplanation:
+      "এমন এক ধরনের ব্রাউজার কুকি যা ক্লায়েন্ট-সাইড জাভাস্ক্রিপ্ট (`document.cookie`) দিয়ে কখনোই পড়া বা এক্সেস করা যায় না। এটি XSS অ্যাটাক থেকে টোকেন বা সেশন আইডি সুরক্ষিত রাখে।",
+    exampleOrTip: "Next.js-এ `cookies()` API বা মিডলওয়্যারে `httpOnly: true, secure: true, sameSite: 'lax'` দিয়ে সেট করতে হয়।",
+    category: "Security",
   },
 };
+

@@ -15,6 +15,7 @@ import {
   Settings,
   BookOpen,
   CheckCircle2,
+  GraduationCap,
 } from "lucide-react";
 import { useUserProgress } from "@/hooks/useUserProgress";
 import { ALL_QUESTIONS } from "@/data/questions";
@@ -40,6 +41,14 @@ export function Sidebar() {
       label: "Dashboard",
       href: "/",
       icon: LayoutDashboard,
+    },
+    {
+      label: "NLAP Mock Interview",
+      href: "/mock-interviews",
+      icon: GraduationCap,
+      badge: 36,
+      badgeColor: "amber",
+      highlight: true,
     },
     {
       label: "Interview Questions",

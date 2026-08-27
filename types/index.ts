@@ -89,6 +89,46 @@ export interface UserProgressState {
   targetDate?: string;
 }
 
+export interface MockInterviewContent {
+  quickAnswer: string;
+  interviewSpeech: string;
+  deepDive: string[];
+  codeSnippet?: {
+    language: string;
+    code: string;
+    caption?: string;
+  };
+  commonMistakes?: string[];
+  proTips?: string[];
+}
+
+export interface MockInterviewItem {
+  id: string;
+  questionNumber: number;
+  question: string;
+  banglaQuestion: string;
+  topic: "React Core" | "Next.js App Router" | "Performance & Data" | "Security & Architecture";
+  difficulty: Difficulty;
+  importance: Importance;
+  tags: string[];
+  english: MockInterviewContent;
+  bangla: MockInterviewContent;
+}
+
+export interface MockInterviewSession {
+  id: string;
+  slug: string;
+  title: string;
+  subtitle: string;
+  date: string; // ISO date string e.g. "2026-08-27"
+  formattedDate: string; // e.g. "August 27, 2026"
+  category: string; // "React & Next.js Core & Advanced"
+  description: string;
+  totalQuestions: number;
+  durationEstimate: string;
+  questions: MockInterviewItem[];
+}
+
 export interface QuestionFilterState {
   searchQuery: string;
   category: string;
@@ -97,3 +137,4 @@ export interface QuestionFilterState {
   status: "all" | "completed" | "incomplete" | "favorites" | "must-know";
   sortBy: "default" | "importance" | "difficulty" | "category";
 }
+

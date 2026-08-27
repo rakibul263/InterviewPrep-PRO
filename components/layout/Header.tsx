@@ -140,6 +140,13 @@ export function Header() {
               Dashboard
             </Link>
             <Link
+              href="/mock-interviews"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-md text-sm font-medium text-amber-700 dark:text-amber-300 hover:bg-amber-50 dark:hover:bg-amber-950/30"
+            >
+              🎓 NLAP Mock Interview (36)
+            </Link>
+            <Link
               href="/questions"
               onClick={() => setIsMobileMenuOpen(false)}
               className="block px-3 py-2 rounded-md text-sm font-medium text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-900"

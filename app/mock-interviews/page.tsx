@@ -15,10 +15,10 @@ import {
   Languages,
   BookOpen,
   Filter,
-  ArrowUpDown,
   GraduationCap,
-  ChevronRight,
   RotateCcw,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
@@ -31,7 +31,10 @@ export default function MockInterviewsPage() {
   const [globalLang, setGlobalLang] = useState<"en" | "bn">("bn");
   const [selectedTopic, setSelectedTopic] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [statusFilter, setStatusFilter] = useState<"all" | "completed" | "incomplete" | "favorites" | "must-know">("all");
+  const [statusFilter, setStatusFilter] = useState<
+    "all" | "completed" | "incomplete" | "favorites" | "must-know"
+  >("all");
+  const [expandAll, setExpandAll] = useState<boolean>(false);
 
   const { isCompleted, isFavorite } = useUserProgress();
 
@@ -55,7 +58,13 @@ export default function MockInterviewsPage() {
           q.english.quickAnswer.toLowerCase().includes(query) ||
           q.bangla.quickAnswer.toLowerCase().includes(query);
 
-        if (!matchesTitle && !matchesBangla && !matchesTopic && !matchesTags && !matchesQuick) {
+        if (
+          !matchesTitle &&
+          !matchesBangla &&
+          !matchesTopic &&
+          !matchesTags &&
+          !matchesQuick
+        ) {
           return false;
         }
       }
@@ -138,7 +147,9 @@ export default function MockInterviewsPage() {
           <div className="w-full md:w-64 p-4 rounded-xl bg-white/80 dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800 backdrop-blur-xs shadow-xs space-y-3">
             <div className="flex items-center justify-between text-xs font-medium">
               <span className="text-zinc-600 dark:text-zinc-400">Session Progress</span>
-              <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{progressPercent}%</span>
+              <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">
+                {progressPercent}%
+              </span>
             </div>
             <Progress value={progressPercent} className="h-2" />
             <div className="flex items-center justify-between text-xs text-zinc-500">
@@ -167,8 +178,15 @@ export default function MockInterviewsPage() {
             />
           </div>
 
-          {/* Global Language Toggle */}
+          {/* Global Language Toggle & Expand All Button */}
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => setExpandAll(!expandAll)}
+              className="px-3 py-2 rounded-lg text-xs font-semibold border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 transition-colors cursor-pointer"
+            >
+              {expandAll ? "Collapse All Details" : "Expand All Details"}
+            </button>
+
             <div className="flex items-center p-1 rounded-lg bg-zinc-200/70 dark:bg-zinc-800 border border-zinc-300/50 dark:border-zinc-700">
               <span className="text-xs font-semibold px-2 text-zinc-600 dark:text-zinc-400 flex items-center gap-1">
                 <Languages className="h-3.5 w-3.5" />
@@ -266,46 +284,34 @@ export default function MockInterviewsPage() {
         </div>
       </div>
 
-      {/* 3. Quick Question Jump Navigation Grid */}
-      <div className="p-4 rounded-xl border border-zinc-200/80 bg-zinc-50/50 dark:border-zinc-800 dark:bg-zinc-950/40">
-        <div className="flex items-center justify-between mb-2.5">
-          <span className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
-            Quick Jump ({filteredQuestions.length} Questions)
+      {/* 3. Question List with Click-to-Expand Details */}
+      <div className="space-y-4">
+        <div className="flex items-center justify-between px-1">
+          <div className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+            Questions List ({filteredQuestions.length} Questions)
+          </div>
+          <span className="text-xs text-zinc-500">
+            👉 যে প্রশ্নের ওপর ক্লিক করবেন সেটির বিস্তারিত উত্তর ও কোড ওপেন হবে
           </span>
-          <span className="text-[11px] text-zinc-400">Hover or click any number to navigate</span>
         </div>
-        <div className="flex flex-wrap gap-1.5">
-          {filteredQuestions.map((q) => {
-            const done = isCompleted(q.id);
-            return (
-              <a
-                key={q.id}
-                href={`#${q.id}`}
-                title={`#${q.questionNumber}: ${q.question}`}
-                className={cn(
-                  "flex items-center justify-center h-7 w-7 rounded-md text-xs font-mono font-semibold transition-all border",
-                  done
-                    ? "bg-emerald-600 text-white border-emerald-600"
-                    : "bg-white text-zinc-700 border-zinc-200 hover:border-amber-400 hover:bg-amber-50 dark:bg-zinc-900 dark:text-zinc-300 dark:border-zinc-800 dark:hover:border-amber-500"
-                )}
-              >
-                {q.questionNumber}
-              </a>
-            );
-          })}
-        </div>
-      </div>
 
-      {/* 4. Question Cards List */}
-      <div className="space-y-6">
         {filteredQuestions.length > 0 ? (
-          filteredQuestions.map((item) => (
-            <MockQuestionCard key={item.id} item={item} globalLang={globalLang} />
-          ))
+          <div className="space-y-4">
+            {filteredQuestions.map((item) => (
+              <MockQuestionCard
+                key={item.id}
+                item={item}
+                globalLang={globalLang}
+                defaultExpanded={expandAll}
+              />
+            ))}
+          </div>
         ) : (
           <div className="p-12 text-center rounded-2xl border border-dashed border-zinc-300 dark:border-zinc-800 space-y-3">
             <Search className="h-8 w-8 text-zinc-400 mx-auto" />
-            <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">No mock questions found</h3>
+            <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
+              No mock questions found
+            </h3>
             <p className="text-xs text-zinc-500 max-w-sm mx-auto">
               No questions matched your search query or active filter. Try resetting your search or topic selection.
             </p>

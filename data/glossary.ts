@@ -423,5 +423,273 @@ export const TECH_GLOSSARY: Record<string, TechGlossaryTerm> = {
     exampleOrTip: "Next.js-এ `cookies()` API বা মিডলওয়্যারে `httpOnly: true, secure: true, sameSite: 'lax'` দিয়ে সেট করতে হয়।",
     category: "Security",
   },
+  libuv: {
+    term: "Libuv Library",
+    aliases: ["libuv library", "threadpool"],
+    banglaTitle: "লিবইউভি (Libuv C++ লাইব্রেরি)",
+    shortExplanation:
+      "Node.js-এর ব্যাকবোন হিসেবে কাজ করা একটি মাল্টি-প্ল্যাটফর্ম C লাইব্রেরি, যা ইভেন্ট লুপ, থ্রেড পুল (Thread Pool), ফাইল সিস্টেম ও নেটওয়ার্কিংয়ের অ্যাসিঙ্ক্রোনাস নন-ব্লকিং I/O পরিচালনা করে।",
+    exampleOrTip: "ডিফল্টভাবে Libuv-এর থ্রেড পুলে ৪টি থ্রেড থাকে, যা `UV_THREADPOOL_SIZE` দিয়ে বাড়ানো যায়।",
+    category: "Node.js Core",
+  },
+  "v8 engine": {
+    term: "V8 JavaScript Engine",
+    aliases: ["v8", "google v8"],
+    banglaTitle: "গুগল V8 ইঞ্জিন",
+    shortExplanation:
+      "গুগলের তৈরি ওপেন-সোর্স হাই-পারফরম্যান্স C++ ইঞ্জিন, যা জাভাস্ক্রিপ্ট কোডকে সরাসরি মেশিনের নেটিভ বাইনারি কোডে (Just-In-Time Compilation - JIT) কম্পাইল করে এক্সিকিউট করে।",
+    category: "Node.js Core",
+  },
+  "thread pool": {
+    term: "Libuv Thread Pool",
+    aliases: ["thread pool", "libuv thread pool", "worker threads pool"],
+    banglaTitle: "থ্রেড পুল (Thread Pool)",
+    shortExplanation:
+      "Node.js মেইন থ্রেডকে ব্লক না করে ভারী ফাইল সিস্টেম অপারেশন (`fs`), ক্রিপ্টোগ্রাফি (`crypto`), এবং DNS লুকআপ ব্যাকগ্রাউন্ডে চালানোর জন্য Libuv-এর পরিচালিত থ্রেড গুচ্ছ।",
+    category: "Node.js Core",
+  },
+  "worker thread": {
+    term: "Worker Threads (`worker_threads`)",
+    aliases: ["worker threads", "worker_threads", "workerthread"],
+    banglaTitle: "ওয়ার্কার থ্রেডস (Worker Threads)",
+    shortExplanation:
+      "Node.js-এ ভারী গাণিতিক হিসাব বা CPU-ইনটেনসিভ কাজকে মূল ইভেন্ট লুপ ব্লক না করে সমান্তরালে (Parallel) চালানোর অফিশিয়াল মডিউল।",
+    exampleOrTip: "CPU-বাউন্ড কাজের জন্য Worker Threads এবং I/O স্কেলিংয়ের জন্য Cluster মডিউল ব্যবহার করা সেরা।",
+    category: "Node.js Architecture",
+  },
+  clustering: {
+    term: "Clustering (`cluster`)",
+    aliases: ["cluster module", "cluster", "node clustering"],
+    banglaTitle: "ক্লাস্টারিং (Cluster Module)",
+    shortExplanation:
+      "সার্ভারের মাল্টি-কোর CPU-এর সবকটি কোরকে কাজে লাগাতে একাধিক চাইল্ড প্রসেস (Worker Process) তৈরি করে একই সার্ভার পোর্ট শেয়ার করে লোড ব্যালেন্স করার পদ্ধতি।",
+    exampleOrTip: "PM2 প্রসেস ম্যানেজার দিয়ে জিরো-কনফিগে ক্লাস্টার মোড চালানো যায়।",
+    category: "Node.js Architecture",
+  },
+  process: {
+    term: "OS Process",
+    aliases: ["processes", "child process", "child_process"],
+    banglaTitle: "প্রসেস (OS Process)",
+    shortExplanation:
+      "অপারেটিং সিস্টেমে চলমান কোনো প্রোগ্রামের সম্পূর্ণ স্বতন্ত্র এক্সিকিউশন ইউনিট যার নিজস্ব মেমরি স্পেস, PID এবং রিসোর্স বরাদ্দ থাকে।",
+    category: "System & OS",
+  },
+  thread: {
+    term: "OS Thread",
+    aliases: ["threads", "multi-threading", "single-threaded"],
+    banglaTitle: "থ্রেড (OS Thread)",
+    shortExplanation:
+      "একটি প্রসেসের মধ্যকার সবচেয়ে ছোট এক্সিকিউশন ইউনিট যা ওই প্রসেসের শেয়ার্ড মেমরি ব্যবহার করে একাধিক কাজ সম্পাদন করে।",
+    category: "System & OS",
+  },
+  "non-blocking i/o": {
+    term: "Non-Blocking I/O",
+    aliases: ["non blocking io", "non-blocking", "asynchronous i/o"],
+    banglaTitle: "নন-ব্লকিং ইনপুট/আউটপুট (Non-Blocking I/O)",
+    shortExplanation:
+      "ফাইল রিড, ডাটাবেস কোয়েরি বা নেটওয়ার্ক কলের মতো দীর্ঘমেয়াদী কাজ ব্যাকগ্রাউন্ডে দিয়ে মেইন থ্রেডকে অন্য রিকোয়েস্ট প্রসেস করতে দেওয়া, যার ফলে কোনো রিকোয়েস্টই থ্রেড ফ্রিজ করে না।",
+    category: "Node.js Core",
+  },
+  "event emitter": {
+    term: "EventEmitter (`events`)",
+    aliases: ["event emitter", "event emitters", "eventemitter"],
+    banglaTitle: "ইভেন্ট এমিটার (EventEmitter)",
+    shortExplanation:
+      "Node.js-এর একটি কোর ক্লাস যা পাবলিশ-সাবস্ক্রাইব (Pub/Sub) প্যাটার্নে কাস্টম ইভেন্ট ফায়ার (`emit`) এবং হ্যান্ডেল (`on` / `once`) করতে দেয়। Streams ও HTTP সার্ভার এর ওপর নির্মিত।",
+    exampleOrTip: "`emitter.on('data', handler)` দিয়ে লিসেন এবং `emitter.emit('data', payload)` দিয়ে ট্রিগার করা হয়।",
+    category: "Node.js Core",
+  },
+  stream: {
+    term: "Node.js Streams",
+    aliases: ["streams", "readable stream", "writable stream", "duplex stream", "transform stream"],
+    banglaTitle: "স্ট্রিমস (Node.js Streams)",
+    shortExplanation:
+      "সম্পূর্ণ ফাইল মেমরিতে একবারে লোড না করে ক্ষুদ্র ক্ষুদ্র অংশে (Chunks) ক্রমান্বয়ে ডেটা রিড বা রাইট করার মেকানিজম, যা মেমরি ব্যবহার ৯০% পর্যন্ত কমায়।",
+    exampleOrTip: "৪ প্রকার স্ট্রিম: Readable, Writable, Duplex (যেমন TCP Socket), Transform (যেমন zlib compression)।",
+    category: "Node.js File System",
+  },
+  buffer: {
+    term: "Node.js Buffer",
+    aliases: ["buffers", "buffer memory", "raw binary"],
+    banglaTitle: "বাফার (Buffer Memory)",
+    shortExplanation:
+      "V8 হিপ মেমরির বাইরে বরাদ্দকৃত কাঁচা বাইনারি ডেটা সংরক্ষণের বিশেষ মেমরি ব্লক, যা স্ট্রিমিং ও ফাইল প্রসেসিংয়ে দ্রুত বাইট প্রসেস করতে সাহায্য করে।",
+    exampleOrTip: "`Buffer.from('Hello')` বা `Buffer.alloc(10)` দিয়ে বাফার তৈরি হয়।",
+    category: "Node.js Core",
+  },
+  backpressure: {
+    term: "Backpressure in Streams",
+    aliases: ["back pressure", "stream backpressure"],
+    banglaTitle: "ব্যাকপ্রেশার (Backpressure)",
+    shortExplanation:
+      "যখন ডাটা রিড হওয়ার গতি ডাটা রাইট হওয়ার গতির চেয়ে দ্রুত হয়, তখন বাফার উপচে পড়া ও মেমরি ক্র্যাশ ঠেকাতে ডেটা পড়ার প্রবাহ সাময়িকভাবে থামিয়ে দেওয়ার নিয়ন্ত্রণ মেকানিজম।",
+    exampleOrTip: "সরাসরি `.pipe()` ব্যবহার করলে Node.js স্বয়ংক্রিয়ভাবে ব্যাকপ্রেশার হ্যান্ডেল করে।",
+    category: "Node.js File System",
+  },
+  pipe: {
+    term: "Stream Piping (`pipe`)",
+    aliases: ["piping", "stream.pipeline", "readable.pipe"],
+    banglaTitle: "স্ট্রিম পাইপিং (`pipe` / `pipeline`)",
+    shortExplanation:
+      "একটি Readable স্ট্রিমের আউটপুট সরাসরি একটি Writable স্ট্রিমে কোনো ম্যানুয়াল বাফার হ্যান্ডলিং ছাড়াই চ্যানেল করার সহজ মেকানিজম।",
+    exampleOrTip: "এরর হ্যান্ডলিং নিখুঁত রাখতে `stream.pipeline` ব্যবহার করা সবচেয়ে নিরাপদ।",
+    category: "Node.js File System",
+  },
+  commonjs: {
+    term: "CommonJS (CJS)",
+    aliases: ["commonjs module", "require()", "module.exports"],
+    banglaTitle: "কমনজেএস মডিউল (CommonJS)",
+    shortExplanation:
+      "Node.js-এর ট্র্যাডিশনাল সিনক্রোনাস মডিউল সিস্টেম যেখানে `require()` দিয়ে মডিউল লোড এবং `module.exports` দিয়ে এক্সপোর্ট করা হয়।",
+    category: "Node.js Architecture",
+  },
+  "es modules": {
+    term: "ES Modules (ESM)",
+    aliases: ["esm", "ecmascript modules", "import export"],
+    banglaTitle: "ইএস মডিউলস (ES Modules)",
+    shortExplanation:
+      "আধুনিক জাভাস্ক্রিপ্টের অফিশিয়াল স্ট্যান্ডার্ড মডিউল সিস্টেম যা স্ট্যাটিক ও অ্যাসিঙ্ক্রোনাসভাবে `import` এবং `export` সিনট্যাক্সে মডিউল হ্যান্ডেল করে এবং ট্রি-শেকিং সাপোর্ট করে।",
+    exampleOrTip: "Node.js-এ `package.json`-এ `\"type\": \"module\"` যোগ করে ESM এনাবল করা যায়।",
+    category: "Node.js Architecture",
+  },
+  npm: {
+    term: "NPM (Node Package Manager)",
+    aliases: ["npm registry", "npm package", "npx"],
+    banglaTitle: "এনপিএম (Node Package Manager)",
+    shortExplanation:
+      "বিশ্বের বৃহত্তম জাভাস্ক্রিপ্ট সফটওয়্যার রেজিস্ট্রি এবং কমান্ড-লাইন টুল যার মাধ্যমে ওপেন-সোর্স প্যাকেজ ইন্সটল, ভার্সন কন্ট্রোল ও স্ক্রিপ্ট রান করা যায়।",
+    category: "Node.js Tools",
+  },
+  "package.json": {
+    term: "package.json Manifest",
+    aliases: ["package.json", "npm manifest"],
+    banglaTitle: "প্যাকেজ ডট জেএসএন (package.json)",
+    shortExplanation:
+      "প্রজেক্টের মেটাডাটা, স্ক্রিপ্ট, ডিপেন্ডেন্সি (Dependencies) এবং কনফিগারেশন ধারণকারী মূল কনফিগ ফাইল।",
+    category: "Node.js Tools",
+  },
+  "package-lock.json": {
+    term: "package-lock.json",
+    aliases: ["package-lock", "lockfile"],
+    banglaTitle: "প্যাকেজ লক ফাইল (package-lock.json)",
+    shortExplanation:
+      "প্রজেক্টে ইন্সটল করা প্রতিটি প্যাকেজের এক্সাক্ট ভার্সন এবং তার সাব-ডিপেন্ডেন্সির ডিপেন্ডেন্সি ট্রি লক করে রাখে যাতে সব মেশিনে একই পরিবেশ বজায় থাকে।",
+    category: "Node.js Tools",
+  },
+  microservices: {
+    term: "Microservices Architecture",
+    aliases: ["microservice", "microservices", "monolith vs microservices"],
+    banglaTitle: "মাইক্রোসার্ভিস আর্কিটেকচার",
+    shortExplanation:
+      "একটি বড় অ্যাপ্লিকেশনকে ছোট ছোট, স্বাধীনভাবে ডিপ্লয়যোগ্য ও নির্দিষ্ট দায়িত্বপ্রাপ্ত সার্ভিসে বিভক্ত করার আর্কিটেকচার যা নেটওয়ার্ক API দিয়ে পরস্পরের সাথে যোগাযোগ করে।",
+    category: "System Design",
+  },
+  express: {
+    term: "Express.js",
+    aliases: ["expressjs", "express framework", "express server"],
+    banglaTitle: "এক্সপ্রেস জেএস (Express.js)",
+    shortExplanation:
+      "Node.js-এর জন্য অত্যন্ত জনপ্রিয়, ফাস্ট, আন-অপিনিয়নেটেড এবং মিনিমালিস্ট ওয়েব ফ্রেমওয়ার্ক যা শক্তিশালী রাউটিং ও মিডলওয়্যার পাইপলাইন প্রদান করে।",
+    category: "Express.js",
+  },
+  "express middleware": {
+    term: "Express Middleware",
+    aliases: ["middlewares", "middleware function", "req res next"],
+    banglaTitle: "এক্সপ্রেস মিডলওয়্যার",
+    shortExplanation:
+      "এমন একটি ফাংশন যার কাছে Request (`req`), Response (`res`) অবজেক্ট এবং পরবর্তী মিডলওয়্যারে যাওয়ার জন্য `next()` ফাংশনের অ্যাক্সেস থাকে।",
+    exampleOrTip: "মিডলওয়্যারে অবশ্যই `res.send()` রেসপন্স পাঠাতে হয় অথবা `next()` কল করতে হয়, নতুবা রিকোয়েস্ট হ্যাং হয়ে থাকবে।",
+    category: "Express.js",
+  },
+  cors: {
+    term: "CORS (Cross-Origin Resource Sharing)",
+    aliases: ["cross-origin resource sharing", "cors policy", "cors error"],
+    banglaTitle: "কোর্স (CORS - Cross-Origin Resource Sharing)",
+    shortExplanation:
+      "ব্রাউজারের একটি সিকিউরিটি মেকানিজম যা এক ডোমেইন/পোর্ট (Origin) থেকে অন্য ডোমেইনে HTTP রিকোয়েস্ট করার অনুমতি HTTP হেডারের (`Access-Control-Allow-Origin`) মাধ্যমে নিয়ন্ত্রণ করে।",
+    exampleOrTip: "Express-এ `cors()` মিডলওয়্যার দিয়ে অনুমোদিত অরিজিন কনফিগার করা হয়।",
+    category: "Web Security",
+  },
+  jwt: {
+    term: "JSON Web Token (JWT)",
+    aliases: ["jsonwebtoken", "jwt token", "bearer token"],
+    banglaTitle: "জেডব্লিউটি (JSON Web Token)",
+    shortExplanation:
+      "একটি কম্প্যাক্ট, ইউআরএল-সেফ এবং ক্রিপ্টোগ্রাফিক্যালি সাইন করা টোকেন যা ৩টি অংশে বিভক্ত: Header, Payload, এবং Signature (`header.payload.signature`)। স্টেটলেস অথেনটিকেশনে ব্যবহৃত হয়।",
+    exampleOrTip: "JWT সাধারণত রিকোয়েস্টের `Authorization: Bearer <token>` হেডারে পাঠানো হয়।",
+    category: "Security",
+  },
+  "rate limiting": {
+    term: "Rate Limiting & Throttling",
+    aliases: ["rate limit", "rate limiter", "api throttling", "express-rate-limit"],
+    banglaTitle: "রেট লিমিটিং ও থ্রটলিং (Rate Limiting)",
+    shortExplanation:
+      "একটি নির্দিষ্ট সময়সীমায় (যেমন প্রতি মিনিটে) একক আইপি বা ইউজারের করা রিকোয়েস্টের সংখ্যা সীমিত করে সার্ভারকে DDoS ও ব্রুট-ফোর্স অ্যাটাক থেকে রক্ষা করার ডিফেন্স টেকনিক।",
+    exampleOrTip: "Express-এ `express-rate-limit` প্যাকেজ দিয়ে `429 Too Many Requests` স্ট্যাটাস রিটার্ন করা হয়।",
+    category: "Security",
+  },
+  salting: {
+    term: "Password Salting",
+    aliases: ["salt", "bcrypt salt", "salted hash"],
+    banglaTitle: "পাসওয়ার্ড সল্টিং (Password Salting)",
+    shortExplanation:
+      "পাসওয়ার্ড হ্যাশ করার আগে তার সাথে একটি ইউনিক র‍্যান্ডম স্ট্রিং (Salt) যুক্ত করা, যাতে রেইনবো টেবিল অ্যাটাক এবং দুটি ইউজারের একই পাসওয়ার্ড হলেও হ্যাশ সম্পূর্ণ আলাদা হয়।",
+    exampleOrTip: "`bcrypt.hash(password, 10)` স্বয়ংক্রিয়ভাবে সল্ট জেনারেট ও সংযুক্ত করে।",
+    category: "Security",
+  },
+  "stateless auth": {
+    term: "Stateless vs Stateful Authentication",
+    aliases: ["stateless authentication", "stateful authentication", "session vs token"],
+    banglaTitle: "স্টেটলেস বনাম স্টেটফুল অথেন্টিকেশন",
+    shortExplanation:
+      "স্টেটফুল পদ্ধতিতে সার্ভার ডাটাবেস/রেডিসে সেশন আইডি সংরক্ষণ করে কুকি পাঠায়; আর স্টেটলেস পদ্ধতিতে (JWT) সার্ভার কোনো স্টেট রাখে না, টোকেনের সিগনেচার যাচাই করেই অথরাইজ করে।",
+    category: "Security",
+  },
+  csrf: {
+    term: "CSRF (Cross-Site Request Forgery)",
+    aliases: ["cross-site request forgery", "csrf attack", "xsrf"],
+    banglaTitle: "সিএসআরএফ অ্যাটাক (CSRF Attack)",
+    shortExplanation:
+      "ইউজারের ব্রাউজারের অটোমেটিক কুকি পাঠানোর সুযোগ নিয়ে হ্যাকার ইউজারকে না জানিয়ে তার লগইন থাকা ব্যাংকিং বা সোশ্যাল একাউন্টে ক্ষতিকর রিকোয়েস্ট এক্সিকিউট করানো।",
+    exampleOrTip: "প্রতিরোধ: `SameSite=Strict/Lax` কুকি অ্যাট্রিবিউট এবং অ্যান্টি-CSRF টোকেন ব্যবহার করা।",
+    category: "Security",
+  },
+  xss: {
+    term: "XSS (Cross-Site Scripting)",
+    aliases: ["cross site scripting", "xss attack", "stored xss"],
+    banglaTitle: "এক্সএসএস অ্যাটাক (Cross-Site Scripting)",
+    shortExplanation:
+      "ওয়েবসাইটে ক্ষতিকর জাভাস্ক্রিপ্ট কোড ইনজেক্ট করে ইউজারের সেশন টোকেন, কুকি বা সংবেদনশীল ডেটা চুরি করার হ্যাকিং টেকনিক।",
+    exampleOrTip: "প্রতিরোধ: ইনপুট স্যানিটাইজেশন, HTML এস্কেপিং, এবং `Content-Security-Policy (CSP)` হেডার।",
+    category: "Security",
+  },
+  "sql injection": {
+    term: "SQL / NoSQL Injection",
+    aliases: ["nosql injection", "sqli", "injection attack"],
+    banglaTitle: "এসকিউএল / নো-এসকিউএল ইনজেকশন",
+    shortExplanation:
+      "অনিরাপদ ইউজার ইনপুটের মাধ্যমে ডাটাবেস কোয়েরির লজিক বদলে দিয়ে অবৈধ ডেটা রিড, ডিলিট বা পুরো ডাটাবেস হাইজ্যাক করার আক্রমণ।",
+    exampleOrTip: "প্রতিরোধ: Parameterized Queries (Prepared Statements) এবং ORM/ODM (Prisma/Mongoose) ব্যবহার করা।",
+    category: "Security",
+  },
+  helmet: {
+    term: "Helmet.js Security",
+    aliases: ["helmet.js", "helmet middleware"],
+    banglaTitle: "হেলমেট জেএস (Helmet.js)",
+    shortExplanation:
+      "Express.js অ্যাপ্লিকেশনে বিভিন্ন সিকিউরিটি HTTP রেসপন্স হেডার (যেমন `Content-Security-Policy`, `X-Content-Type-Options`, `Strict-Transport-Security`) স্বয়ংক্রিয়ভাবে সেট করার অপরিহার্য মিডলওয়্যার।",
+    exampleOrTip: "`app.use(helmet())` এক লাইনে ১৫টির বেশি সিকিউরিটি হেডার কনফিগার করে দেয়।",
+    category: "Security",
+  },
+  "brute force": {
+    term: "Brute-Force Attack",
+    aliases: ["brute-force", "brute force attack", "credential stuffing"],
+    banglaTitle: "ব্রুট-ফোর্স অ্যাটাক (Brute-Force Attack)",
+    shortExplanation:
+      "অটোমেটেড বটের সাহায্যে ঘনঘন হাজার হাজার পাসওয়ার্ড বা কম্বিনেশন ট্রাই করে সঠিক লগইন ক্রিডেনশিয়াল ক্র্যাক করার চেষ্টা।",
+    exampleOrTip: "প্রতিরোধ: Rate limiting, একাউন্ট লকআউট পলিসি, CAPTCHA, এবং Multi-Factor Authentication (MFA)।",
+    category: "Security",
+  },
 };
+
 

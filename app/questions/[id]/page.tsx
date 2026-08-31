@@ -6,6 +6,7 @@ import { getQuestionById } from "@/data/questions";
 import { useUserProgress } from "@/hooks/useUserProgress";
 import { QuestionHeader } from "@/components/questions/QuestionHeader";
 import { ShortAnswerBox } from "@/components/questions/ShortAnswerBox";
+import { VisualFlowCard } from "@/components/questions/VisualFlowCard";
 import { ExplanationSection } from "@/components/questions/ExplanationSection";
 import { InterviewAnswerCard } from "@/components/questions/InterviewAnswerCard";
 import { DetailedBreakdown } from "@/components/questions/DetailedBreakdown";
@@ -57,6 +58,9 @@ export default function QuestionDetailPage({
 
       {/* 2. Short Answer (সংক্ষিপ্ত উত্তর) */}
       <ShortAnswerBox shortAnswer={question.shortAnswer} />
+
+      {/* 2.5. Interactive Visual Architecture & Execution Flow */}
+      <VisualFlowCard question={question} />
 
       {/* 3. Easy Explanation (সহজ ব্যাখ্যা) */}
       <ExplanationSection easyExplanation={question.easyExplanation} />

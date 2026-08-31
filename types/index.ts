@@ -36,6 +36,23 @@ export interface FollowUpQuestion {
   shortHint?: string;
 }
 
+export interface VisualFlowStep {
+  step: number;
+  title: string;
+  subtitle?: string;
+  description: string;
+  location: string; // e.g. "Client Browser", "V8 Call Stack", "Libuv Thread Pool", "OS Kernel", "Express Middleware Stack", "Database", "Event Loop"
+  badge?: string;
+  highlightSnippet?: string;
+  icon?: "cpu" | "server" | "database" | "network" | "layers" | "shield" | "refresh" | "clock" | "zap" | "code" | "check";
+}
+
+export interface VisualDiagram {
+  title: string;
+  subtitle?: string;
+  steps: VisualFlowStep[];
+}
+
 export interface Question {
   id: string;
   slug: string;
@@ -54,6 +71,7 @@ export interface Question {
     whenToUse: string;
     keyPoints: string[];
   };
+  visualDiagram?: VisualDiagram;
   codeExample?: {
     language: string;
     code: string;

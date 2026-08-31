@@ -11,6 +11,8 @@ import { typescriptTypesQuestions } from "./questions/typescript-types";
 import { typescriptAdvancedQuestions } from "./questions/typescript-advanced";
 import { typescriptArchitectureInternalsQuestions } from "./questions/typescript-architecture-internals";
 import { fullstackAndSystemQuestions } from "./questions/fullstack-and-system";
+import { nodejsQuestions } from "./questions/nodejs";
+import { expressjsQuestions } from "./questions/expressjs";
 
 export const ALL_QUESTIONS: Question[] = [
   ...javascriptCoreQuestions,
@@ -25,6 +27,8 @@ export const ALL_QUESTIONS: Question[] = [
   ...typescriptAdvancedQuestions,
   ...typescriptArchitectureInternalsQuestions,
   ...fullstackAndSystemQuestions,
+  ...nodejsQuestions,
+  ...expressjsQuestions,
 ];
 
 export function getQuestionById(id: string): Question | undefined {

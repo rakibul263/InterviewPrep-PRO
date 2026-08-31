@@ -50,7 +50,7 @@ export default function RootLayout({
     >
       <body
         suppressHydrationWarning
-        className="min-h-screen bg-zinc-50/50 text-zinc-900 antialiased selection:bg-zinc-900 selection:text-white dark:bg-[#0c0d12] dark:text-zinc-100 dark:selection:bg-zinc-100 dark:selection:text-zinc-950"
+        className="min-h-screen bg-[#faf7f2] text-[#2c2520] antialiased selection:bg-[#d4a96a] selection:text-[#2c2520] dark:bg-[#0c0d12] dark:text-zinc-100 dark:selection:bg-zinc-100 dark:selection:text-zinc-950"
       >
         <ThemeProvider
           attribute="class"

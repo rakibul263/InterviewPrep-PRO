@@ -7,7 +7,6 @@ import {
   Search,
   Moon,
   Sun,
-  Laptop,
   Maximize2,
   Menu,
   X,
@@ -29,9 +28,10 @@ export function Header() {
 
   const toggleTheme = () => {
     if (theme === "dark") setTheme("light");
-    else if (theme === "light") setTheme("system");
     else setTheme("dark");
   };
+
+  const isDark = theme === "dark" || (theme === "system" && typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const cycleFontSize = () => {
     const current = progress.readingFontSize || "normal";
@@ -48,7 +48,7 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-20 h-16 w-full border-b border-zinc-200/80 bg-white/80 backdrop-blur-md dark:border-zinc-800/80 dark:bg-zinc-950/80 transition-colors">
+      <header className="sticky top-0 z-20 h-16 w-full border-b border-[#e0d9ce] bg-[#faf7f2]/88 backdrop-blur-md dark:border-zinc-800/80 dark:bg-zinc-950/80 transition-colors">
         <div className="flex h-full items-center justify-between px-4 sm:px-6">
           {/* Left: Mobile Brand & Menu button */}
           <div className="flex items-center gap-3 md:hidden">
@@ -70,7 +70,7 @@ export function Header() {
           <div className="flex-1 max-w-md mx-2 sm:mx-4">
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="w-full h-9 flex items-center justify-between px-3 rounded-lg border border-zinc-200 bg-zinc-50/80 text-xs text-zinc-400 hover:border-zinc-300 hover:bg-zinc-100/80 dark:border-zinc-800 dark:bg-zinc-900/60 dark:text-zinc-500 dark:hover:border-zinc-700 transition-all cursor-pointer"
+              className="w-full h-9 flex items-center justify-between px-3 rounded-lg border border-[#e0d9ce] bg-[#f5f0e8]/80 text-xs text-[#9c8d7f] hover:border-[#c9b99a] hover:bg-[#ede8df]/80 dark:border-zinc-800 dark:bg-zinc-900/60 dark:text-zinc-500 dark:hover:border-zinc-700 transition-all cursor-pointer"
             >
               <div className="flex items-center gap-2">
                 <Search className="h-3.5 w-3.5 text-zinc-400" />
@@ -112,19 +112,46 @@ export function Header() {
               <Maximize2 className="h-3.5 w-3.5" />
             </Link>
 
-            {/* Theme Toggle Button */}
+            {/* Theme Toggle — animated pill switch */}
             <button
               onClick={toggleTheme}
-              title={`Current theme: ${theme || "system"}. Click to toggle.`}
-              className="flex items-center justify-center h-8 w-8 rounded-lg border border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 dark:border-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-            >
-              {theme === "dark" ? (
-                <Moon className="h-3.5 w-3.5" />
-              ) : theme === "light" ? (
-                <Sun className="h-3.5 w-3.5" />
-              ) : (
-                <Laptop className="h-3.5 w-3.5" />
+              title={`Switch to ${isDark ? "Light" : "Dark"} mode`}
+              aria-label={`Switch to ${isDark ? "Light" : "Dark"} mode`}
+              className={cn(
+                "relative flex items-center h-8 w-[68px] rounded-full border transition-all duration-300 cursor-pointer",
+                isDark
+                  ? "bg-zinc-800 border-zinc-700 hover:border-zinc-600"
+                  : "bg-zinc-100 border-zinc-200 hover:border-zinc-300"
               )}
+            >
+              {/* Track icons */}
+              <Sun
+                className={cn(
+                  "absolute left-2 h-3.5 w-3.5 transition-all duration-300",
+                  isDark ? "text-zinc-600" : "text-amber-500"
+                )}
+              />
+              <Moon
+                className={cn(
+                  "absolute right-2 h-3.5 w-3.5 transition-all duration-300",
+                  isDark ? "text-indigo-400" : "text-zinc-400"
+                )}
+              />
+              {/* Sliding Knob */}
+              <span
+                className={cn(
+                  "absolute h-6 w-6 rounded-full shadow-md transition-all duration-300 flex items-center justify-center",
+                  isDark
+                    ? "translate-x-[38px] bg-zinc-900 border border-zinc-600"
+                    : "translate-x-[2px] bg-white border border-zinc-200"
+                )}
+              >
+                {isDark ? (
+                  <Moon className="h-3 w-3 text-indigo-400" />
+                ) : (
+                  <Sun className="h-3 w-3 text-amber-500" />
+                )}
+              </span>
             </button>
           </div>
         </div>
@@ -187,13 +214,6 @@ export function Header() {
               className="block px-3 py-2 rounded-md text-sm font-medium text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-900"
             >
               Progress & Stats
-            </Link>
-            <Link
-              href="/notes"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-md text-sm font-medium text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-900"
-            >
-              My Notes
             </Link>
             <Link
               href="/settings"

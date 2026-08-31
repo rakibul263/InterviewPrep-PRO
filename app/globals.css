@@ -2,16 +2,134 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@layer base {
-  :root {
-    color-scheme: light;
-  }
+/* ═══════════════════════════════════════════
+   WARM LIGHT MODE — Cream / Parchment Palette
+   চোখে আরামদায়ক, উষ্ণ রঙের আবহ
+═══════════════════════════════════════════ */
+:root {
+  color-scheme: light;
 
-  .dark {
-    color-scheme: dark;
-  }
+  /* Warm backgrounds */
+  --bg-base:        #faf7f2;   /* warm cream — body */
+  --bg-surface:     #fffdf9;   /* warm off-white — cards */
+  --bg-subtle:      #f5f0e8;   /* warm parchment — sidebar, sections */
+  --bg-muted:       #ede8df;   /* warm sand — hover, input bg */
+  --bg-input:       #f7f3ec;   /* form input background */
+
+  /* Warm borders */
+  --border-base:    #e0d9ce;   /* warm stone border */
+  --border-subtle:  #ece7dc;   /* lighter warm border */
+
+  /* Warm text */
+  --text-primary:   #2c2520;   /* warm dark brown */
+  --text-secondary: #6b5e52;   /* warm medium brown */
+  --text-muted:     #9c8d7f;   /* warm muted tan */
+
+  /* Warm accent (used in scrollbar, selection) */
+  --accent-warm:    #c9b99a;
 }
 
+.dark {
+  color-scheme: dark;
+  /* Dark mode keeps original zinc values via Tailwind classes */
+}
+
+/* ═══════════════════════════════════════════
+   Apply warm palette to light mode elements
+═══════════════════════════════════════════ */
+:root:not(.dark) {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+}
+
+/* Body base */
+body {
+  font-family: var(--font-bengali), var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+}
+
+/* Light mode: override Tailwind's cold zinc backgrounds with warm tones */
+:root:not(.dark) .bg-white {
+  background-color: var(--bg-surface) !important;
+}
+
+:root:not(.dark) .bg-zinc-50,
+:root:not(.dark) .bg-zinc-50\/50 {
+  background-color: var(--bg-subtle) !important;
+}
+
+:root:not(.dark) .bg-zinc-100,
+:root:not(.dark) .bg-zinc-100\/40,
+:root:not(.dark) .bg-zinc-100\/80 {
+  background-color: var(--bg-muted) !important;
+}
+
+:root:not(.dark) .border-zinc-200,
+:root:not(.dark) .border-zinc-200\/80,
+:root:not(.dark) .border-zinc-200\/60 {
+  border-color: var(--border-base) !important;
+}
+
+:root:not(.dark) .border-zinc-100 {
+  border-color: var(--border-subtle) !important;
+}
+
+/* Warm text overrides for cold zinc grays */
+:root:not(.dark) .text-zinc-900 {
+  color: var(--text-primary) !important;
+}
+
+:root:not(.dark) .text-zinc-800 {
+  color: #3d3229 !important;
+}
+
+:root:not(.dark) .text-zinc-700 {
+  color: #4f4237 !important;
+}
+
+:root:not(.dark) .text-zinc-600 {
+  color: var(--text-secondary) !important;
+}
+
+:root:not(.dark) .text-zinc-500 {
+  color: var(--text-muted) !important;
+}
+
+:root:not(.dark) .text-zinc-400 {
+  color: #b5a494 !important;
+}
+
+/* Warm sidebar & header */
+:root:not(.dark) aside {
+  background-color: var(--bg-subtle) !important;
+  border-color: var(--border-base) !important;
+}
+
+:root:not(.dark) header {
+  background-color: rgba(250, 247, 242, 0.88) !important;
+  border-color: var(--border-base) !important;
+}
+
+/* Warm hover states */
+:root:not(.dark) .hover\:bg-zinc-100:hover,
+:root:not(.dark) .hover\:bg-zinc-100\/80:hover {
+  background-color: var(--bg-muted) !important;
+}
+
+:root:not(.dark) .hover\:bg-zinc-200\/60:hover {
+  background-color: #e5ddd0 !important;
+}
+
+/* Selection color — warm amber */
+:root:not(.dark) ::selection {
+  background-color: #d4a96a;
+  color: #2c2520;
+}
+
+/* ═══════════════════════════════════════════
+   Font sizes
+═══════════════════════════════════════════ */
 html[data-font-size="normal"] {
   font-size: 16px;
 }
@@ -24,17 +142,13 @@ html[data-font-size="xlarge"] {
   font-size: 20px;
 }
 
-body {
-  font-family: var(--font-bengali), var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  line-height: 1.65;
-  letter-spacing: -0.01em;
-}
-
 code, pre, kbd {
   font-family: var(--font-mono), monospace;
 }
 
-/* Eye-friendly custom scrollbar */
+/* ═══════════════════════════════════════════
+   Eye-friendly custom scrollbar
+═══════════════════════════════════════════ */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -45,12 +159,12 @@ code, pre, kbd {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(161, 161, 170, 0.4);
+  background: rgba(161, 144, 122, 0.4);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(161, 161, 170, 0.7);
+  background: rgba(161, 144, 122, 0.7);
 }
 
 .dark ::-webkit-scrollbar-thumb {

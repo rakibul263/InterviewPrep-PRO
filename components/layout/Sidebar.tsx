@@ -11,21 +11,31 @@ import {
   Sparkles,
   Flame,
   LineChart,
-  StickyNote,
   Settings,
   BookOpen,
   CheckCircle2,
   GraduationCap,
+  Sun,
+  Moon,
 } from "lucide-react";
 import { useUserProgress } from "@/hooks/useUserProgress";
 import { ALL_QUESTIONS } from "@/data/questions";
 import { cn } from "@/lib/utils";
 import { Progress } from "@/components/ui/progress";
 import { Logo } from "@/components/ui/Logo";
+import { useTheme } from "@/components/theme/ThemeProvider";
 
 export function Sidebar() {
   const pathname = usePathname();
   const { progress } = useUserProgress();
+  const { theme, setTheme } = useTheme();
+
+  const isDark = theme === "dark" || (theme === "system" && typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+  const toggleTheme = () => {
+    if (isDark) setTheme("light");
+    else setTheme("dark");
+  };
 
   const totalQuestions = ALL_QUESTIONS.length;
   const completedCount = progress.completedQuestionIds.length;
@@ -91,12 +101,6 @@ export function Sidebar() {
       icon: LineChart,
     },
     {
-      label: "Notes",
-      href: "/notes",
-      icon: StickyNote,
-      badge: Object.keys(progress.notes).length || undefined,
-    },
-    {
       label: "Settings",
       href: "/settings",
       icon: Settings,
@@ -104,9 +108,9 @@ export function Sidebar() {
   ];
 
   return (
-    <aside className="hidden md:flex w-64 flex-col fixed inset-y-0 left-0 z-30 border-r border-zinc-200/80 bg-zinc-50/50 backdrop-blur-md dark:border-zinc-800/80 dark:bg-zinc-950/70">
+    <aside className="hidden md:flex w-64 flex-col fixed inset-y-0 left-0 z-30 border-r border-[#e0d9ce] bg-[#f5f0e8]/90 backdrop-blur-md dark:border-zinc-800/80 dark:bg-zinc-950/70">
       {/* Brand Header */}
-      <div className="h-16 flex items-center px-5 border-b border-zinc-200/80 dark:border-zinc-800/80">
+      <div className="h-16 flex items-center px-5 border-b border-[#e0d9ce] dark:border-zinc-800/80">
         <Logo size="md" href="/" />
       </div>
 
@@ -167,8 +171,49 @@ export function Sidebar() {
         })}
       </div>
 
+      {/* Theme Toggle Row */}
+      <div className="px-3 pb-0">
+        <div className="flex items-center justify-between px-3 py-2.5 rounded-xl border border-zinc-200/80 dark:border-zinc-800/60 bg-zinc-100/40 dark:bg-zinc-900/20">
+          <span className="text-xs font-medium text-zinc-600 dark:text-zinc-400 flex items-center gap-1.5">
+            {isDark ? (
+              <Moon className="h-3.5 w-3.5 text-indigo-400" />
+            ) : (
+              <Sun className="h-3.5 w-3.5 text-amber-500" />
+            )}
+            {isDark ? "Dark Mode" : "Light Mode"}
+          </span>
+
+          {/* Pill Toggle */}
+          <button
+            onClick={toggleTheme}
+            aria-label={`Switch to ${isDark ? "Light" : "Dark"} mode`}
+            className={cn(
+              "relative flex items-center h-6 w-12 rounded-full border transition-all duration-300 cursor-pointer",
+              isDark
+                ? "bg-indigo-600/90 border-indigo-500/50"
+                : "bg-zinc-200 border-zinc-300"
+            )}
+          >
+            <span
+              className={cn(
+                "absolute h-4 w-4 rounded-full shadow transition-all duration-300 flex items-center justify-center",
+                isDark
+                  ? "translate-x-[28px] bg-white"
+                  : "translate-x-[2px] bg-white"
+              )}
+            >
+              {isDark ? (
+                <Moon className="h-2.5 w-2.5 text-indigo-600" />
+              ) : (
+                <Sun className="h-2.5 w-2.5 text-amber-500" />
+              )}
+            </span>
+          </button>
+        </div>
+      </div>
+
       {/* Preparation Progress Widget */}
-      <div className="p-4 border-t border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/40 dark:bg-zinc-900/20 m-3 rounded-xl">
+      <div className="p-4 border-t border-[#e0d9ce] dark:border-zinc-800/80 bg-[#ede8df]/60 dark:bg-zinc-900/20 m-3 rounded-xl">
         <div className="flex items-center justify-between text-xs mb-1.5">
           <div className="flex items-center gap-1.5 text-zinc-700 dark:text-zinc-300 font-medium">
             <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />

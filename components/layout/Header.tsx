@@ -167,6 +167,13 @@ export function Header() {
               Dashboard
             </Link>
             <Link
+              href="/morning-session"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-md text-sm font-medium text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/30"
+            >
+              🌅 Morning Session Interview (100)
+            </Link>
+            <Link
               href="/mock-interviews"
               onClick={() => setIsMobileMenuOpen(false)}
               className="block px-3 py-2 rounded-md text-sm font-medium text-amber-700 dark:text-amber-300 hover:bg-amber-50 dark:hover:bg-amber-950/30"

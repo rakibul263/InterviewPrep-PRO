@@ -120,12 +120,26 @@ export interface MockInterviewContent {
   proTips?: string[];
 }
 
+export type MockInterviewTopic =
+  | "React Core"
+  | "Next.js App Router"
+  | "Performance & Data"
+  | "Security & Architecture"
+  | "Interpersonal & HR"
+  | "MongoDB & NoSQL"
+  | "SQL & Relational DB"
+  | "Transactions & ACID"
+  | "Prisma ORM"
+  | "Scaling & Optimization"
+  | (string & {});
+
 export interface MockInterviewItem {
   id: string;
   questionNumber: number;
+  module?: string;
   question: string;
   banglaQuestion: string;
-  topic: "React Core" | "Next.js App Router" | "Performance & Data" | "Security & Architecture";
+  topic: MockInterviewTopic;
   difficulty: Difficulty;
   importance: Importance;
   tags: string[];

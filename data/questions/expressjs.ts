@@ -2,7 +2,7 @@ import { Question } from "@/types";
 
 export const expressjsQuestions: Question[] = [
   // ==========================================
-  // 🔵 Express.js Core (3 Questions)
+  // 🔵 Express.js Core (4 Questions)
   // ==========================================
   {
     id: "express-what-is-and-use-cases",
@@ -335,12 +335,206 @@ app.get('/api/dashboard', checkAuth, (req, res) => {
     ],
     followUpQuestions: [
       {
+        question: "Explain REST API and how it works in Express.js",
+        targetId: "express-explain-rest-api",
+        shortHint: "REST architecture, HTTP verbs, statelessness, status codes."
+      }
+    ],
+    tags: ["Express.js", "Lifecycle", "Middleware", "next()", "Architecture"]
+  },
+  {
+    id: "express-explain-rest-api",
+    slug: "express-explain-rest-api",
+    question: "Explain REST API and how it works in Express.js",
+    category: "Express.js",
+    categorySlug: "expressjs",
+    difficulty: "Beginner",
+    importance: "Must Know",
+    shortAnswer: "**REST (Representational State Transfer) API** হলো এমন একটি আর্কিটেকচারাল স্টাইল বা স্ট্যান্ডার্ড নিয়মাবলী যা ক্লায়েন্ট (Frontend/Mobile app) এবং সার্ভারের (Express.js Backend) মধ্যে স্ট্যান্ডার্ড **HTTP প্রোটোকল** ব্যবহার করে ডেটা আদান-প্রদান করতে ব্যবহৃত হয়। REST API-এর মূল ভিত্তি হলো: **১. Resource-ভিত্তিক URI** (যেমন `/api/users`), **২. স্ট্যান্ডার্ড HTTP Verbs** (GET, POST, PUT, PATCH, DELETE), **৩. Statelessness** (সার্ভার ক্লায়েন্টের কোনো সেশন স্টেট ধরে রাখে না; প্রতিটি রিকোয়েস্টে সব প্রয়োজনীয় তথ্য যেমন Auth Token থাকে), **৪. JSON ফরম্যাট**, এবং **৫. উপযুক্ত HTTP Status Codes** (যেমন 200, 201, 400, 401, 404, 500)।",
+    easyExplanation: "সহজ ভাষায় ও বাস্তব উপমায় বুঝুন:\n১. **রেস্টুরেন্টের উপমা**:\n   - আপনি হলেন **Client (Frontend)**।\n   - কিচেন হলো **Server/Database (Backend)**।\n   - আর ওয়েটার হলো **REST API**!\n   - ওয়েটার একটি নির্দিষ্ট 'মেনু কার্ড' (API Endpoints) নিয়ে আসে। আপনি ওয়েটারকে অর্ডার দেন: 'একটি বার্গার দিন' (POST /orders)। ওয়েটার কিচেন থেকে বার্গার বানিয়ে আপনার টেবিলে এনে দেয় এবং একটি বিল/রসিদ দেয় (Status: 201 Created)।\n২. **সহজ ৪টি মূল নিয়ম**:\n   - **Resource (রিসোর্স)**: সবকিছুই একেকটি ডেটা সত্ত্বা, যেমন ইউজার, প্রোডাক্ট বা অর্ডার। ইউআরএল সবসময় Noun হবে (যেমন `/api/products`, কখনোই `/api/getProducts` নয়)।\n   - **HTTP Verbs (অ্যাকশন)**: আপনি কী করতে চান তা মেথড দিয়ে বোঝাবেন:\n     - `GET`: ডেটা পড়া বা দেখা (Read)\n     - `POST`: নতুন ডেটা তৈরি করা (Create)\n     - `PUT`: পুরো ডেটা সম্পূর্ণ রিপ্লেস করা (Full Update)\n     - `PATCH`: ডেটার নির্দিষ্ট কিছু অংশ আপডেট করা (Partial Update)\n     - `DELETE`: ডেটা মুছে ফেলা (Delete)\n   - **Stateless (স্টেটলেস)**: সার্ভার মনে রাখে না আপনি আগে কী রিকোয়েস্ট করেছিলেন। প্রতিটি রিকোয়েস্ট একদম স্বয়ংসম্পূর্ণ।\n   - **JSON রেসপন্স**: সব ডেটা সহজে মানুষের ও মেশিনের পড়ার উপযোগী JSON ফরম্যাটে আদান-প্রদান হয়।",
+    interviewAnswer: "A **REST (Representational State Transfer) API** is an architectural style for designing networked applications that communicate over the stateless **HTTP protocol**. In an Express.js backend, a RESTful API adheres to key architectural constraints: 1. **Resource-Oriented URIs**: Endpoints represent resources as nouns (e.g., `/api/v1/courses`), while HTTP verbs define the operations. 2. **Standard HTTP Methods & Idempotency**: `GET` (read, idempotent & safe), `POST` (create, non-idempotent), `PUT` (full replacement, idempotent), `PATCH` (partial update, non-idempotent), and `DELETE` (removal, idempotent). 3. **Statelessness**: Every request contains all necessary context (headers, tokens, payload) to be processed; the server stores no client session state. 4. **Uniform Interface & Standard Status Codes**: Responses return structured JSON paired with explicit HTTP status codes (200 OK, 201 Created, 204 No Content, 400 Bad Request, 401 Unauthorized, 404 Not Found, 500 Server Error). 5. **Layered System & Cacheability**: Responses indicate cacheability via headers (`Cache-Control`) to maximize CDN and browser efficiency.",
+    detailedExplanation: {
+      whatItIs: "ক্লায়েন্ট এবং সার্ভারের মধ্যে যোগাযোগের জন্য বহুল ব্যবহৃত স্ট্যান্ডার্ড ও স্টেটলেস আর্কিটেকচারাল গাইডলাইন।",
+      whyItExists: "যেকোনো প্ল্যাটফর্ম (Web, iOS, Android, Desktop, IoT) যাতে একই Express.js ব্যাকএন্ডের সাথে কোনো টাইট কাপলিং ছাড়া ইউনিভার্সাল HTTP ও JSON-এর মাধ্যমে ডেটা আদান-প্রদান করতে পারে।",
+      howItWorks: "ক্লায়েন্ট নির্দিষ্ট URI ও HTTP Method দিয়ে রিকোয়েস্ট পাঠায় -> Express রাউটার সেটি ধরে কন্ট্রোলারে পাঠায় -> কন্ট্রোলার ডাটাবেস অপারেশন সম্পন্ন করে -> উপযুক্ত HTTP স্ট্যাটাস কোড সহ JSON রেসপন্স ফেরত দেয়।",
+      whenToUse: "সব আধুনিক সিঙ্গেল পেজ অ্যাপ (React, Next.js, Vue), মোবাইল ব্যাকএন্ড, পাবলিক এপিআই এবং মাইক্রোসার্ভিস তৈরিতে।",
+      keyPoints: [
+        "Idempotency: GET, PUT, এবং DELETE হলো Idempotent (একই রিকোয়েস্ট ১ বার পাঠালে যে ফলাফল হবে, ১০ বার পাঠালেও সার্ভারের চূড়ান্ত অবস্থা একই থাকবে)।",
+        "POST এবং PATCH স্বাভাবিকভাবে Idempotent নয় (বারবার POST পাঠালে একাধিক নতুন রিসোর্স তৈরি হবে)।",
+        "PUT বনাম PATCH: PUT পুরো অবজেক্ট প্রতিস্থাপন (Full Overwrite) করে, আর PATCH শুধুমাত্র পাঠানো নির্দিষ্ট ফিল্ডগুলো আংশিক আপডেট (Partial Update) করে।",
+        "Stateless Authentication: কোনো সেশন মেমোরিতে না রেখে Bearer JWT টোকেন হেডার (`Authorization: Bearer <token>`) দিয়ে অথেনটিকেশন নিশ্চিত করা হয়।"
+      ]
+    },
+    visualDiagram: {
+      title: "Express.js RESTful Request-Response Architecture",
+      subtitle: "ক্লায়েন্ট থেকে Express.js REST API এন্ডপয়েন্টে ডেটা আদান-প্রদানের পূর্ণাঙ্গ জীবনচক্র:",
+      steps: [
+        {
+          step: 1,
+          title: "ক্লায়েন্ট HTTP রিকোয়েস্ট",
+          subtitle: "HTTP Verb + Resource URI",
+          location: "Client (React / Mobile App)",
+          icon: "network",
+          description: "ক্লায়েন্ট নির্দিষ্ট মেথড, URI, হেডার এবং অপশনাল JSON বডিসহ রিকোয়েস্ট পাঠায় (যেমন `POST /api/courses`)।",
+          highlightSnippet: "POST /api/courses HTTP/1.1\nContent-Type: application/json\nAuthorization: Bearer <token>\n{ \"title\": \"Node.js Masterclass\", \"price\": 49 }"
+        },
+        {
+          step: 2,
+          title: "মিডলওয়্যার ও পার্সিং স্তর",
+          subtitle: "express.json() & Auth",
+          location: "Express Middleware Pipeline",
+          icon: "layers",
+          description: "Express ইনকামিং JSON বডি পার্স করে `req.body`-তে দেয় এবং JWT টোকেন ভেরিফাই করে।",
+          highlightSnippet: "app.use(express.json());\napp.use(verifyToken);"
+        },
+        {
+          step: 3,
+          title: "রিসোর্স রাউটিং ডিসপ্যাচ",
+          subtitle: "Method & Path Matching",
+          location: "express.Router()",
+          icon: "server",
+          description: "HTTP Verb এবং URI মিলিয়ে নির্দিষ্ট হ্যান্ডলার ফাংশনে রিকোয়েস্ট পাঠিয়ে দেয়।",
+          highlightSnippet: "router.route('/courses')\n  .get(getCourses)\n  .post(createCourse);"
+        },
+        {
+          step: 4,
+          title: "ডাটাবেস ও বিজনেস লজিক",
+          subtitle: "CRUD Operation",
+          location: "Controller & Database",
+          icon: "database",
+          description: "কন্ট্রোলার ডাটা ভ্যালিডেশন করে ডাটাবেসে নতুন রেকর্ড ইনসার্ট করে বা কুয়েরি চালায়।",
+          highlightSnippet: "const newCourse = await Course.create(req.body);"
+        },
+        {
+          step: 5,
+          title: "স্ট্যান্ডার্ড REST JSON রেসপন্স",
+          subtitle: "Status Code + JSON Body",
+          location: "Client Response Delivery",
+          icon: "check",
+          description: "সঠিক HTTP স্ট্যাটাস কোড (যেমন 201 Created) সহ JSON ডেটা ক্লায়েন্টকে রিটার্ন করে।",
+          highlightSnippet: "res.status(201).json({\n  success: true,\n  data: newCourse\n});"
+        }
+      ]
+    },
+    codeExample: {
+      language: "javascript",
+      code: `// Express.js দিয়ে পূর্ণাঙ্গ RESTful CRUD API উদাহরণ
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+// ইন-মেমোরি রিসোর্স
+let courses = [
+  { id: 1, title: 'Node.js Masterclass', price: 49 },
+  { id: 2, title: 'Express.js Deep Dive', price: 39 }
+];
+
+// ১. GET /api/courses - Read all resources (200 OK)
+app.get('/api/courses', (req, res) => {
+  res.status(200).json({ success: true, count: courses.length, data: courses });
+});
+
+// ২. GET /api/courses/:id - Read single resource by ID (200 OK বা 404 Not Found)
+app.get('/api/courses/:id', (req, res) => {
+  const course = courses.find(c => c.id === parseInt(req.params.id));
+  if (!course) {
+    return res.status(404).json({ success: false, message: 'Course not found' });
+  }
+  res.status(200).json({ success: true, data: course });
+});
+
+// ৩. POST /api/courses - Create new resource (201 Created)
+app.post('/api/courses', (req, res) => {
+  const { title, price } = req.body;
+  if (!title || !price) {
+    return res.status(400).json({ success: false, message: 'Title and price are required' });
+  }
+  const newCourse = { id: courses.length + 1, title, price };
+  courses.push(newCourse);
+  res.status(201).json({ success: true, data: newCourse });
+});
+
+// ৪. PATCH /api/courses/:id - Partial update (200 OK)
+app.patch('/api/courses/:id', (req, res) => {
+  const course = courses.find(c => c.id === parseInt(req.params.id));
+  if (!course) {
+    return res.status(404).json({ success: false, message: 'Course not found' });
+  }
+  if (req.body.title) course.title = req.body.title;
+  if (req.body.price) course.price = req.body.price;
+  res.status(200).json({ success: true, data: course });
+});
+
+// ৫. DELETE /api/courses/:id - Remove resource (204 No Content)
+app.delete('/api/courses/:id', (req, res) => {
+  const index = courses.findIndex(c => c.id === parseInt(req.params.id));
+  if (index === -1) {
+    return res.status(404).json({ success: false, message: 'Course not found' });
+  }
+  courses.splice(index, 1);
+  res.status(204).send(); // 204 No Content
+});
+
+app.listen(5000, () => console.log('REST API Server running on port 5000'));`,
+      explanationSteps: [
+        {
+          step: 1,
+          title: "Noun-ভিত্তিক Resource URI",
+          description: "URI-তে কোনো ভার্ব না রেখে `/api/courses` বহুবচন Noun হিসেবে রাখা হয়েছে।"
+        },
+        {
+          step: 2,
+          title: "HTTP Methods দিয়ে অ্যাকশন নির্ধারণ",
+          description: "GET দিয়ে পড়া, POST দিয়ে তৈরি, PATCH দিয়ে আংশিক আপডেট এবং DELETE দিয়ে মোছা হয়েছে।"
+        },
+        {
+          step: 3,
+          title: "স্ট্যান্ডার্ড HTTP Status Codes",
+          description: "সফল পাঠে 200 OK, নতুন ডেটা তৈরিতে 201 Created, ডিলিটে 204 No Content, ভুল ইনপুটে 400 এবং না পেলে 404 রিটার্ন করা হয়েছে।"
+        }
+      ]
+    },
+    realWorldExamples: [
+      {
+        title: "GitHub / Stripe REST APIs",
+        description: "বিশ্বের জনপ্রিয়তম পাবলিক API যা স্ট্রিক্ট REST নীতিমালা, প্রেডিক্টেবল রিসোর্স ইউআরএল এবং আদর্শ HTTP কোড ব্যবহার করে।"
+      },
+      {
+        title: "E-Commerce Mobile App Backend",
+        description: "মোবাইল অ্যাপ ফ্রন্টএন্ড যাতে ক্যাটাগরি, প্রোডাক্ট, অর্ডার এবং পেমেন্ট সংক্রান্ত যেকোনো ডেটা সহজে আদান-প্রদান করতে পারে।"
+      }
+    ],
+    interviewTips: {
+      tip: "ইন্টারভিউতে অবশ্যই **PUT বনাম PATCH** এবং **Idempotency** ব্যাখ্যা করবেন: 'PUT পুরো অবজেক্ট প্রতিস্থাপন করে এবং Idempotent; আর PATCH শুধুমাত্র নির্দিষ্ট ফিল্ড আপডেট করে এবং Non-Idempotent'।",
+      deliveryStrategy: "সংজ্ঞা -> রেস্টুরেন্টের ওয়েটার উপমা -> ৫টি কোর কনস্ট্রেইন্ট (Stateless, Uniform Interface) -> HTTP Methods ও Idempotency -> Status Codes।",
+      avoidSaying: [
+        {
+          wrong: "REST API-এর URL-এ কাজ বোঝাতে ভার্ব লেখা উচিত, যেমন `/api/createCourse` বা `/api/deleteCourse?id=1`।",
+          right: "REST-এ URL সবসময় Noun (রিসোর্স) হবে যেমন `/api/courses` বা `/api/courses/1` এবং অ্যাকশন নির্ধারিত হবে HTTP Verb (POST, DELETE) দ্বারা।"
+        },
+        {
+          wrong: "সব রেসপন্সেই সবসময় status 200 OK পাঠিয়ে বডিতে `{ error: true }` পাঠানো ভালো প্র্যাকটিস।",
+          right: "সঠিক HTTP Status Code ব্যবহার করা আবশ্যক: যেমন ক্লায়েন্ট ভুলের জন্য 400 Bad Request / 404 Not Found, অথেনটিকেশনে 401, সার্ভার ক্র্যাশে 500।"
+        }
+      ]
+    },
+    quickRevision: [
+      "REST = Representational State Transfer (Stateless, Resource-oriented Architecture)।",
+      "URI Nouns (`/api/courses`), HTTP Verbs (`GET, POST, PUT, PATCH, DELETE`)।",
+      "Idempotent: GET, PUT, DELETE (একই রিকোয়েস্ট বারবার পাঠালেও সার্ভারে একই অবস্থা থাকে)।",
+      "Non-Idempotent: POST (প্রতিবার নতুন রিসোর্স তৈরি করে)।",
+      "PUT = Full overwrite; PATCH = Partial update।",
+      "Status Codes: 200 (OK), 201 (Created), 204 (No Content), 400 (Bad Request), 401 (Unauthorized), 403 (Forbidden), 404 (Not Found), 500 (Internal Server Error)।"
+    ],
+    followUpQuestions: [
+      {
         question: "What is routing in Express.js?",
         targetId: "express-routing-explained",
         shortHint: "URI matching, HTTP methods, express.Router."
       }
     ],
-    tags: ["Express.js", "Lifecycle", "Middleware", "next()", "Architecture"]
+    tags: ["Express.js", "REST API", "HTTP Methods", "Architecture", "CRUD", "Status Codes"]
   },
 
   // ==========================================

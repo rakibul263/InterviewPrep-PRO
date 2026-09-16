@@ -15,6 +15,7 @@ import {
   BookOpen,
   CheckCircle2,
   GraduationCap,
+  Sunrise,
   Sun,
   Moon,
 } from "lucide-react";
@@ -51,6 +52,14 @@ export function Sidebar() {
       label: "Dashboard",
       href: "/",
       icon: LayoutDashboard,
+    },
+    {
+      label: "Morning Session Interview",
+      href: "/morning-session",
+      icon: Sunrise,
+      badge: 100,
+      badgeColor: "emerald",
+      highlight: true,
     },
     {
       label: "NLAP Mock Interview",

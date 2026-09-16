@@ -50,6 +50,14 @@ export const CATEGORIES: Category[] = [
     color: "zinc",
   },
   {
+    id: "database",
+    name: "Database (SQL & NoSQL)",
+    slug: "database",
+    description: "DBMS architecture, normalization, ACID vs BASE, SQL joins, indexing, and transactions.",
+    icon: "Database",
+    color: "emerald",
+  },
+  {
     id: "mongodb",
     name: "MongoDB",
     slug: "mongodb",

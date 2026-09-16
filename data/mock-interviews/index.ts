@@ -1,10 +1,23 @@
 import { MockInterviewSession, MockInterviewItem } from "@/types";
 import {
-  MOCK_INTERVIEW_SESSIONS,
+  MOCK_INTERVIEW_SESSIONS as REACT_MOCK_SESSIONS,
   REACT_NEXTJS_MOCK_QUESTIONS_AUG_2026,
 } from "./react-nextjs-august-2026";
+import {
+  DATABASE_MOCK_SESSION,
+  DATABASE_SQL_NOSQL_MOCK_QUESTIONS,
+} from "./database-sql-nosql";
 
-export { MOCK_INTERVIEW_SESSIONS, REACT_NEXTJS_MOCK_QUESTIONS_AUG_2026 };
+export const MOCK_INTERVIEW_SESSIONS: MockInterviewSession[] = [
+  DATABASE_MOCK_SESSION,
+  ...REACT_MOCK_SESSIONS,
+];
+
+export {
+  REACT_NEXTJS_MOCK_QUESTIONS_AUG_2026,
+  DATABASE_SQL_NOSQL_MOCK_QUESTIONS,
+  DATABASE_MOCK_SESSION,
+};
 
 export function getAllMockSessions(): MockInterviewSession[] {
   return MOCK_INTERVIEW_SESSIONS;

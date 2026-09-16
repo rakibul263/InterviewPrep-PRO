@@ -13,6 +13,10 @@ import { typescriptArchitectureInternalsQuestions } from "./questions/typescript
 import { fullstackAndSystemQuestions } from "./questions/fullstack-and-system";
 import { nodejsQuestions } from "./questions/nodejs";
 import { expressjsQuestions } from "./questions/expressjs";
+import { databaseCoreQuestions } from "./questions/database-core";
+import { mongodbQuestions } from "./questions/mongodb";
+import { postgresqlQuestions } from "./questions/postgresql";
+import { prismaQuestions } from "./questions/prisma";
 
 export const ALL_QUESTIONS: Question[] = [
   ...javascriptCoreQuestions,
@@ -29,6 +33,10 @@ export const ALL_QUESTIONS: Question[] = [
   ...fullstackAndSystemQuestions,
   ...nodejsQuestions,
   ...expressjsQuestions,
+  ...databaseCoreQuestions,
+  ...mongodbQuestions,
+  ...postgresqlQuestions,
+  ...prismaQuestions,
 ];
 
 export function getQuestionById(id: string): Question | undefined {

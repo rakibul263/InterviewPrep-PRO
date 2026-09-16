@@ -84,21 +84,24 @@ export default function MockInterviewsPage() {
     });
   }, [questions, searchQuery, selectedTopic, statusFilter, isCompleted, isFavorite]);
 
-  // Topic counts
+  // Topic counts dynamically calculated per session
   const topicCounts = useMemo(() => {
     const counts: Record<string, number> = {
       all: questions.length,
-      "React Core": 0,
-      "Next.js App Router": 0,
-      "Performance & Data": 0,
-      "Security & Architecture": 0,
     };
     questions.forEach((q) => {
-      if (counts[q.topic] !== undefined) {
-        counts[q.topic]++;
-      }
+      counts[q.topic] = (counts[q.topic] || 0) + 1;
     });
     return counts;
+  }, [questions]);
+
+  // Unique topics in current session
+  const sessionTopics = useMemo(() => {
+    const list: string[] = [];
+    questions.forEach((q) => {
+      if (!list.includes(q.topic)) list.push(q.topic);
+    });
+    return list;
   }, [questions]);
 
   // Session completion stats
@@ -110,7 +113,34 @@ export default function MockInterviewsPage() {
     questions.length > 0 ? Math.round((completedCount / questions.length) * 100) : 0;
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8 pb-20 animate-in fade-in-50 duration-200">
+    <div className="max-w-5xl mx-auto space-y-6 pb-20 animate-in fade-in-50 duration-200">
+      {/* 0. Session Selection Tabs */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-2 rounded-2xl bg-zinc-100/80 dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800">
+        <div className="flex flex-wrap items-center gap-2">
+          {sessions.map((sess) => (
+            <button
+              key={sess.slug}
+              onClick={() => {
+                setSelectedSessionSlug(sess.slug);
+                setSelectedTopic("all");
+                setSearchQuery("");
+              }}
+              className={cn(
+                "flex items-center gap-2.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer",
+                selectedSessionSlug === sess.slug
+                  ? "bg-white text-zinc-900 shadow-sm dark:bg-zinc-800 dark:text-zinc-100 ring-1 ring-zinc-300/80 dark:ring-zinc-700"
+                  : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200 hover:bg-zinc-200/50 dark:hover:bg-zinc-800/40"
+              )}
+            >
+              <span>{sess.category}</span>
+              <span className="px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20 text-[11px] font-mono font-bold">
+                {sess.totalQuestions} Qs
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* 1. Hero / Header Banner */}
       <div className="relative overflow-hidden rounded-2xl border border-amber-200/70 bg-gradient-to-br from-amber-500/10 via-amber-500/5 to-transparent p-6 sm:p-8 dark:border-amber-800/40 dark:from-amber-950/40 dark:via-zinc-900/40">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
@@ -220,24 +250,29 @@ export default function MockInterviewsPage() {
 
         {/* Topic Pills Filter */}
         <div className="flex flex-wrap items-center gap-2">
-          {[
-            { id: "all", label: `All Topics (${topicCounts.all})` },
-            { id: "React Core", label: `React Core (${topicCounts["React Core"]})` },
-            { id: "Next.js App Router", label: `Next.js App Router (${topicCounts["Next.js App Router"]})` },
-            { id: "Performance & Data", label: `Performance & Data (${topicCounts["Performance & Data"]})` },
-            { id: "Security & Architecture", label: `Security & Architecture (${topicCounts["Security & Architecture"]})` },
-          ].map((topic) => (
+          <button
+            onClick={() => setSelectedTopic("all")}
+            className={cn(
+              "px-3 py-1.5 rounded-lg text-xs font-medium border transition-all cursor-pointer",
+              selectedTopic === "all"
+                ? "bg-zinc-900 text-white border-zinc-900 shadow-xs dark:bg-zinc-100 dark:text-zinc-900 dark:border-zinc-100"
+                : "bg-white text-zinc-600 border-zinc-200 hover:bg-zinc-50 dark:bg-zinc-900 dark:text-zinc-400 dark:border-zinc-800 dark:hover:bg-zinc-800/80"
+            )}
+          >
+            All Topics ({topicCounts.all || 0})
+          </button>
+          {sessionTopics.map((topic) => (
             <button
-              key={topic.id}
-              onClick={() => setSelectedTopic(topic.id)}
+              key={topic}
+              onClick={() => setSelectedTopic(topic)}
               className={cn(
                 "px-3 py-1.5 rounded-lg text-xs font-medium border transition-all cursor-pointer",
-                selectedTopic === topic.id
+                selectedTopic === topic
                   ? "bg-zinc-900 text-white border-zinc-900 shadow-xs dark:bg-zinc-100 dark:text-zinc-900 dark:border-zinc-100"
                   : "bg-white text-zinc-600 border-zinc-200 hover:bg-zinc-50 dark:bg-zinc-900 dark:text-zinc-400 dark:border-zinc-800 dark:hover:bg-zinc-800/80"
               )}
             >
-              {topic.label}
+              {topic} ({topicCounts[topic] || 0})
             </button>
           ))}
         </div>

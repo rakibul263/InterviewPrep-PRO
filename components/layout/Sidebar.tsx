@@ -16,6 +16,7 @@ import {
   CheckCircle2,
   GraduationCap,
   Sunrise,
+  Trophy,
   Sun,
   Moon,
 } from "lucide-react";
@@ -52,6 +53,14 @@ export function Sidebar() {
       label: "Dashboard",
       href: "/",
       icon: LayoutDashboard,
+    },
+    {
+      label: "Placement Arena",
+      href: "/placement-arena",
+      icon: Trophy,
+      badge: 15,
+      badgeColor: "indigo",
+      highlight: true,
     },
     {
       label: "Morning Session Interview",
@@ -169,6 +178,10 @@ export function Sidebar() {
                       ? "bg-white/20 text-white dark:bg-zinc-900/20 dark:text-zinc-900"
                       : item.badgeColor === "amber"
                       ? "bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300"
+                      : item.badgeColor === "indigo"
+                      ? "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-300"
+                      : item.badgeColor === "emerald"
+                      ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300"
                       : "bg-zinc-200 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-400"
                   )}
                 >

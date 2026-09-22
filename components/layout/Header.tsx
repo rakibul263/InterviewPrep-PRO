@@ -167,6 +167,13 @@ export function Header() {
               Dashboard
             </Link>
             <Link
+              href="/placement-arena"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-md text-sm font-medium text-indigo-700 dark:text-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-950/30"
+            >
+              🏆 Placement Arena (Day 1)
+            </Link>
+            <Link
               href="/morning-session"
               onClick={() => setIsMobileMenuOpen(false)}
               className="block px-3 py-2 rounded-md text-sm font-medium text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/30"

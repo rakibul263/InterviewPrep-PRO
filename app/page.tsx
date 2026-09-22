@@ -13,6 +13,7 @@ import {
   PlayCircle,
   BookOpen,
   TrendingUp,
+  Trophy,
 } from "lucide-react";
 import { ALL_QUESTIONS } from "@/data/questions";
 import { CATEGORIES } from "@/data/categories";
@@ -132,28 +133,56 @@ export default function DashboardPage() {
         </div>
       )}
 
-      {/* Featured NLAP Mock Interview Session Banner */}
-      <div className="relative overflow-hidden rounded-2xl border border-amber-300 bg-gradient-to-r from-amber-500/15 via-indigo-500/10 to-transparent p-5 sm:p-6 dark:border-amber-700/60 dark:from-amber-950/40 dark:via-zinc-900/60 shadow-xs">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="space-y-1.5 max-w-xl">
+      {/* Featured Sessions Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {/* Placement Arena Banner */}
+        <div className="relative overflow-hidden rounded-2xl border border-indigo-300 bg-gradient-to-r from-indigo-500/15 via-purple-500/10 to-transparent p-5 sm:p-6 dark:border-indigo-700/60 dark:from-indigo-950/40 dark:via-zinc-900/60 shadow-xs flex flex-col justify-between">
+          <div className="space-y-1.5">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-900 dark:text-indigo-300 border border-indigo-500/30 text-[11px] font-bold">
+              <Trophy className="h-3 w-3" />
+              <span>NEW: Placement Arena — Day 1 Active</span>
+            </div>
+            <h2 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-100">
+              JavaScript Fundamentals I (Variables, Scope & Functions)
+            </h2>
+            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+              All 15 placement questions solved in depth with bilingual interview scripts, deep dives, executable code snippets, and common mistakes.
+            </p>
+          </div>
+
+          <div className="pt-4">
+            <Link href="/placement-arena">
+              <Button className="bg-indigo-600 hover:bg-indigo-700 text-white dark:bg-indigo-500 dark:text-zinc-950 font-bold px-4 py-2 shadow-xs cursor-pointer">
+                <span>Enter Placement Arena</span>
+                <ArrowRight className="h-4 w-4 ml-1.5" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+
+        {/* Featured NLAP Mock Interview Session Banner */}
+        <div className="relative overflow-hidden rounded-2xl border border-amber-300 bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-transparent p-5 sm:p-6 dark:border-amber-700/60 dark:from-amber-950/40 dark:via-zinc-900/60 shadow-xs flex flex-col justify-between">
+          <div className="space-y-1.5">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-900 dark:text-amber-300 border border-amber-500/30 text-[11px] font-bold">
               <Sparkles className="h-3 w-3" />
-              <span>NEW: Today's Mock Interview (36 Questions)</span>
+              <span>NLAP Mock Interview (36 Questions)</span>
             </div>
             <h2 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-100">
               React & Next.js Core to Advanced Mock Session
             </h2>
             <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
-              Date: <strong>August 27, 2026</strong> • All 36 interview questions with Bangla & English toggle scripts, deep dives, code patterns, and glossary hover tooltips.
+              Date: <strong>August 27, 2026</strong> • All 36 interview questions with Bangla & English toggle scripts, deep dives, code patterns, and glossary tooltips.
             </p>
           </div>
 
-          <Link href="/mock-interviews">
-            <Button className="bg-amber-600 hover:bg-amber-700 text-white dark:bg-amber-500 dark:text-zinc-950 font-bold px-4 py-2 shadow-xs cursor-pointer">
-              <span>Start Mock Prep</span>
-              <ArrowRight className="h-4 w-4 ml-1.5" />
-            </Button>
-          </Link>
+          <div className="pt-4">
+            <Link href="/mock-interviews">
+              <Button className="bg-amber-600 hover:bg-amber-700 text-white dark:bg-amber-500 dark:text-zinc-950 font-bold px-4 py-2 shadow-xs cursor-pointer">
+                <span>Start Mock Prep</span>
+                <ArrowRight className="h-4 w-4 ml-1.5" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
 

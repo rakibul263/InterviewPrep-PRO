@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { useUserProgress } from "@/hooks/useUserProgress";
 import { ALL_QUESTIONS } from "@/data/questions";
+import { PLACEMENT_ARENA_QUESTIONS } from "@/data/placement-arena";
 import { cn } from "@/lib/utils";
 import { Progress } from "@/components/ui/progress";
 import { Logo } from "@/components/ui/Logo";
@@ -58,7 +59,7 @@ export function Sidebar() {
       label: "Placement Arena",
       href: "/placement-arena",
       icon: Trophy,
-      badge: 15,
+      badge: PLACEMENT_ARENA_QUESTIONS.length,
       badgeColor: "indigo",
       highlight: true,
     },

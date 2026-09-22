@@ -140,13 +140,13 @@ export default function DashboardPage() {
           <div className="space-y-1.5">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-900 dark:text-indigo-300 border border-indigo-500/30 text-[11px] font-bold">
               <Trophy className="h-3 w-3" />
-              <span>NEW: Placement Arena — Day 1 Active</span>
+              <span>NEW: Placement Arena — Day 1 & Day 2 (30 Questions Active)</span>
             </div>
             <h2 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-100">
-              JavaScript Fundamentals I (Variables, Scope & Functions)
+              JavaScript Fundamentals (Days 1 & 2)
             </h2>
             <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
-              All 15 placement questions solved in depth with bilingual interview scripts, deep dives, executable code snippets, and common mistakes.
+              All 30 placement questions solved in depth with bilingual interview scripts, deep dives, executable code snippets, and common mistakes.
             </p>
           </div>
 

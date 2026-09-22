@@ -125,7 +125,7 @@ export default function PlacementArenaPage() {
                   Placement Arena
                 </span>
                 <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-300/50 dark:border-amber-800/50">
-                  Day 1 Active (15 Questions)
+                  {PLACEMENT_ARENA_DAYS.length} Days Active ({allQuestions.length} Questions)
                 </span>
                 <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300/50 dark:border-emerald-800/50">
                   <CheckCircle2 className="w-3 h-3" />
@@ -146,7 +146,7 @@ export default function PlacementArenaPage() {
                 <div className="flex items-center justify-between text-xs font-medium">
                   <span className="text-zinc-700 dark:text-zinc-300 flex items-center gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                    Day 1 Progress ({completedCount} / {allQuestions.length})
+                    Curriculum Progress ({completedCount} / {allQuestions.length})
                   </span>
                   <span className="text-indigo-700 dark:text-indigo-400 font-bold">{progressPercent}%</span>
                 </div>

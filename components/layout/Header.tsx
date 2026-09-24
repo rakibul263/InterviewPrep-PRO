@@ -171,7 +171,7 @@ export function Header() {
               onClick={() => setIsMobileMenuOpen(false)}
               className="block px-3 py-2 rounded-md text-sm font-medium text-indigo-700 dark:text-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-950/30"
             >
-              🏆 Placement Arena (Day 1)
+              🏆 Placement Arena
             </Link>
             <Link
               href="/morning-session"

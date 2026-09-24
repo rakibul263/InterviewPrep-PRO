@@ -1,6 +1,7 @@
 import { MockInterviewItem } from "@/types";
 import { day1Questions } from "./day1";
 import { day2Questions } from "./day2";
+import { day3Questions } from "./day3";
 
 export interface PlacementDayInfo {
   id: string;
@@ -34,11 +35,23 @@ export const PLACEMENT_ARENA_DAYS: PlacementDayInfo[] = [
     count: 15,
     badgeColor: "indigo",
   },
+  {
+    id: "day-3-react-fund",
+    dayNumber: 3,
+    title: "Day 3 — React Fundamentals",
+    module: "React Fundamentals",
+    topic: "Components, Hooks & State Management",
+    questionRange: [31, 45],
+    count: 15,
+    badgeColor: "cyan",
+  },
 ];
 
 export const PLACEMENT_ARENA_QUESTIONS: MockInterviewItem[] = [
   ...day1Questions,
   ...day2Questions,
+  ...day3Questions,
 ];
 
-export { day1Questions, day2Questions };
+export { day1Questions, day2Questions, day3Questions };
+
